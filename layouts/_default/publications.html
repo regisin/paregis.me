@@ -1,0 +1,29 @@
+{{ define "main" }} {{ with .Content }}
+<div class="index-content">{{ . }}</div>
+{{ end }}
+
+<h2>Journal articles</h2>
+
+<ul>
+  {{ range where .Pages ".Params.categories" "intersect" (slice "Journal") }}
+  <li>
+    <a href="{{ .Permalink }}" style="text-decoration: none"
+      >{{ .Params.Citation | markdownify }}</a
+    >
+  </li>
+  {{ end }}
+</ul>
+
+<h2>Conference papers</h2>
+
+<ul>
+  {{ range where .Pages ".Params.categories" "intersect" (slice "Conference") }}
+  <li>
+    <a href="{{ .Permalink }}" style="text-decoration: none"
+      >{{ .Params.Citation | markdownify }}</a
+    >
+  </li>
+  {{ end }}
+</ul>
+
+{{ end }}
