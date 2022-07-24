@@ -7,28 +7,39 @@ categories:
 - Tutorial
 ---
 
+**TL;DR**: In this post, I will be implementing a hot reload mechanism do I can use FastAPI for both front and backend development.
+
 ## Introduction
 
-This is a relatively simple and opinionated way of doing this. It's also the only way so far that I know how to do this.
+I'm a big fa of some frameworks out there. I like Svelte and sveltekit, I've used Strapi for this website's backend for a couple of years, now I'm using Hugo to simplify my workflow. I have also been tinkering with FastAPI lately, yet another framework, this time for backend. Each and every one of those have a purpose and try to solve some sort of problem.
 
-### Why am I writing about this?
+While they do what they are meant to be, for me personally, the amount of different techs in a stack can get overwhelming. Yes I like using sveltekit for my frontend. Yes I like having a nice CMS in the backend. But sometimes all of these get in the way of being productive and prevent me from actually putting ideas to practice! That's what I'm trying to fix, little by little.
 
-### What is hot module reload? How does it work?
-Check svelte/read/vue/etc.
+The web, the http protocol specifically, is basically the same as it was back i the day. It trasfers text files from a server (backend) to the client (browser). Those files are then interpreted by the client and displayed on the screen. All of that to say that I don't need a fancy frontend framework such as React/Vue/(Thor forbid)Angular/Svelte... I can just generate html files and send them back to the client! The client doesn't even need to do a single API call, just display the html. That's one of the reasons I will be using FastAPI. The main goal is to develop an entire website using a minimal stack. If I can do it all using python, awesome!
 
-In practice, client opens websocket to server, refresh if websocket disconnects.
+*Gosh, that's a long text that could've stayed in my private notes or a journal. I got my eyes on you, pyscript!*
 
-### What is Jinja?
+In short, FastAPI is a python framework that makes it easy to implement web APIs. It's documentation (I think it's more of a guided tutorial) is fantastic. I can't possibly cover all of it, you should check it out if you're not familiar with it but are still reading this text. :)
 
-### What is FastAPI?
+While FastAPI is great for what it does, it is NOT a frontend stack. However, it does support a very cool templating engine, Jinja2. With jinja I can essentially create a bunch of html templates, load it in python using FaspAPI, and inject data into it. The templates then form a valid html file that can be sent back to the client that made a request to the FastAPI backend.
 
+One issue though, and perhaps something that we take for granted when we start developing a web app in a modern framework, is that while we develop and hit *save*, our browser automatically updates with the new changes. That's not really the case with FastAPI+Jinja. While FastAPI does have a *reload* option (if you're using uvicorn), it does NOT automatically refresh the browser tab that you have opened automatically! This behavior is called hot reload, or hot module reload, or something similar. It might not be a problem at first, but again, we kind of take if for granted with modern frameworks.
 
+## Solution design
 
-## Storytime
+I'm not reinventing the wheel here. In fact, the solution already exists, just no one wrote a blog that uses FastAPI. I found the solution at [Create a live-reload server for front-end development](https://www.bscotch.net/post/create-a-live-reload-server), where the backend is using NodeJS.
 
-I can't cover the beginning of time, so I assume you have `python` installed. I used `3.10`, but could work with `3.6` depending which FastAPI version you use.
+The idea is pretty straight forward: the dev web server, whiule running, listens to WebSocket on a specific endpoint. The client, when loaded by the browser, will connect to that WS endpoint (using some minimal JavaScript). When the server reloads, it will close all conections. The client, when detecting that a WS connection was lost, will try to reconnect for a few times: if it reconnects, means the server reloaded successfully, if not, time out after a a few tries. If the connection is reestablished, then the JavaScript in the client will trigger a page reload (same as you hitting F5 after every update to the server).
 
-1. Create a new project environment, mine is called `potato`. I like to keep my projects isolated and independent, so I use python's [Virtual Environments](https://docs.python.org/3/tutorial/venv.html) (I'm using Mac so the commands might be slightly different).
+    > Note: this thing is only for development purposes. I would remove it from production!
+
+Enough talking!
+
+## Morph(Cod)ing time
+
+I can't do a better job at teaching you about FastAPI than [its official documentation](fastapi.tiangolo.com/). I'm using `3.10`, but it could work with `3.6` depending which FastAPI version you use. I'm also doing this on a macOS, so adapt the commands accordingly.
+
+1. New project, I like to use [Virtual Environments](https://docs.python.org/3/tutorial/venv.html) for each new python project.
 
     ```bash
     ~ % mkdir potato
@@ -47,12 +58,14 @@ I can't cover the beginning of time, so I assume you have `python` installed. I 
     (env) potato % pip install jinja2
     ```
 
-1. Create the simplest FastAPI app in a `main.py`:
+1. Create the FastAPI app, mine is in `main.py`:
 
     ```python
-    from fastapi import FastAPI
+    from fastapi import FastAPI, WebSocket, WebSocketDisconnect
     from fastapi.responses import HTMLResponse
     from fastapi.templating import Jinja2Templates
+
+    from app.utils import reloader
 
     templates = Jinja2Templates(directory="templates")
 
@@ -66,12 +79,26 @@ I can't cover the beginning of time, so I assume you have `python` installed. I 
     @app.get("/", status_code=200, response_class=HTMLResponse)
     def home(request: Request):
         return views.TemplateResponse('Home.html', {"request": request,
+                                                    "reloader": reloader,
                                                     "title":"Potato"})
+
+    @app.websocket("/ws")
+    async def websocket_endpoint(websocket: WebSocket):
+        try:
+            await websocket.accept()
+            while True:
+                pass
+        except WebSocketDisconnect:
+            pass
     ```
 
-    It's a very simple app with only one route: `localhost:8000/`. There are no openapi docs because we are not creating an API, we are being naughty and using FastAPI for a frontend workflow!
+    The app has two endpoints:
+    * `/`: which in this case will return a populated jinja template. This will be accessed through `http://localhost:8000/`
+    * `/ws`: the websocket that will restart everytime the server reloads. It's endpoint is `ws://localhost:8000/ws`.
 
-    We will modify this script a little bit later. For now, notice the `Jinja2Templates`. It points to a directory that doesn't exist, and is also empty (??).
+    The home endpoint `/` will read a template from the server (in the `/templates` directory, we will get to the template itself next), pass a couple of data to it (the `title` and `reloader`, more on the reloader later), and return the final html back to the client when requested.
+
+    The WS endpoint has no real use except to exists! It doesn't transfer any sort of data, it reeally is just so the client is able to notice when the server reloads (aka WS connection is lost). We are also cathing (excepting) the `WebSocketDisconnect` because if not, everytime we reload the server, the terminal that is running will be polluted with a trace stack.
 
 1. Create the Jinja template in the `templates` directory:
 
@@ -99,11 +126,90 @@ I can't cover the beginning of time, so I assume you have `python` installed. I 
 
     ```python
     return views.TemplateResponse('Home.html', {"request": request,
+                                            "reloader":reloader,
                                             "title":"Potato"})
     ```
 
-    We will use the other placeholder (`{{ reloader|safe }}`) for our hot module reloader.
+    Same with the `{{ reloader|safe }}`, but this will be a JavaScript snippet that we still need to implement. `safe` here is to tell jinja that this variable is safe to render. Which it is, but you woulkdn't if you didn't know what was the contents of `reloader`.
 
+
+
+1. The `reloader` script:
+
+    ```html
+    <script>
+    (() => {
+        const socketUrl = "ws://localhost:8000/ws";
+        var ws = new WebSocket(socketUrl);
+        /*
+        * Hot Module Reload
+        */
+        ws.addEventListener('close',() => {
+            const interAttemptTimeoutMilliseconds = 100;
+            const maxAttempts = 5;
+            let attempts = 0;
+            const reloadIfCanConnect = () => {
+                attempts++ ;
+                if(attempts > maxAttempts){
+                    console.error('[WS:error]', 'HMR could not reconnect to dev server.');
+                    return;
+                }
+                socket = new WebSocket(socketUrl);
+                socket.addEventListener('error',()=>{
+                    setTimeout(reloadIfCanConnect,interAttemptTimeoutMilliseconds);
+                });
+                socket.addEventListener('open',() => {
+                    location.reload();
+                });
+            };
+            reloadIfCanConnect();
+        });
+    })();
+    </script>
+    ```
+
+    This snippet is from [Create a live-reload server for front-end development](https://www.bscotch.net/post/create-a-live-reload-server). This will be injected in our html template before sending it to the browser.
+
+    Once the browser receives the html with that script, it will execute that self calling function. It will open a websocket connection to our websocket endpoint. When the connection closes, it will wait a few (`100`) miullisecconds and try to reconnect. Repeat up to 5 times. If reconnected successfully, refresh the page with `location.reload()`, aka "hot" reload the page.
+
+    To make things easier, put that in a python format. Mine is in `utils.py`:
+
+    ```python
+    reloader = """
+    <script>
+    (() => {
+        const socketUrl = "ws://localhost:8000/ws";
+        var ws = new WebSocket(socketUrl);
+        /*
+        * Hot Module Reload
+        */
+        ws.addEventListener('close',() => {
+            const interAttemptTimeoutMilliseconds = 100;
+            const maxAttempts = 5;
+            let attempts = 0;
+            const reloadIfCanConnect = () => {
+                attempts++ ;
+                if(attempts > maxAttempts){
+                    console.error('[WS:error]', 'HMR could not reconnect to dev server.');
+                    return;
+                }
+                socket = new WebSocket(socketUrl);
+                socket.addEventListener('error',()=>{
+                    setTimeout(reloadIfCanConnect,interAttemptTimeoutMilliseconds);
+                });
+                socket.addEventListener('open',() => {
+                    location.reload();
+                });
+            };
+            reloadIfCanConnect();
+        });
+    })();
+    </script>
+    """
+    ```
+
+    So I can import in my FastAPI app.
+    
 1. Now you can run your FastAPI app with uvicorn with `(env) potato % uvicorn main:app --reload`.
 
     > **Great! We're done, right?**
@@ -115,84 +221,6 @@ I can't cover the beginning of time, so I assume you have `python` installed. I 
     Awesome, now whenever we modify a `.py` OR `.html` files, the server will take notice and reload. However, if you had your browser opened on the dev server `http://localhost:8000`, you will not see the changes unless you refresh it.
     
     That's kind of annoying... sure I can hit `F5` all the time, but it gets old fast! We need to trigger that same reload to happen in the browser.
-
-1. How hot module reload works? I got the inspiration from (this website)[https://www.bscotch.net/post/create-a-live-reload-server].
-    
-    1. The idea is to create an endpoint on the server that listens to the WebSocket protocol `ws://`.
-    1. Then the client will have a tiny bit of JavaScript that opens a connection to the web socket.
-    1. If the client detects that the server disconnected, it tries to reloads the page if reconnected successfully.
-    1. If it cannot connect to the web socket server, give up after a few tries.
-
-1. Create the Web Socket endpoint.
-
-    Let's modify the FastAPI and add a new endpoint, but this time a WebSocket endpoint:
-
-    ```python
-    from fastapi import FastAPI, WebSocket, WebSocketDisconnect
-    from fastapi.responses import HTMLResponse
-    from fastapi.templating import Jinja2Templates
-
-    templates = Jinja2Templates(directory="templates")
-
-    app = FastAPI(
-        title='Potato',
-        openapi_url=None,
-        docs_url=None,
-        redoc_url=None,
-    )
-
-    @app.get("/", status_code=200, response_class=HTMLResponse)
-    def home(request: Request):
-        return views.TemplateResponse('Home.html', {"request": request,
-                                                    "title":"Potato"})
-
-    @app.websocket("/ws")
-    async def websocket_endpoint(websocket: WebSocket):
-        try:
-            await websocket.accept()
-            while True:
-                pass
-        except WebSocketDisconnect:
-            pass
-    ```
-
-    It's really just that, the endpoint only exists to open and close the connection, no messages are passed in this web socket. We also `except` the `WebSocketDisconnect` to keep the console clean. Otherwise, everytime the server reloads that exception will be raised and the stack will pollute the screen. Every. Single. Time.
-
-1. Inject the template with some JavaScript to connect to the websocket:
-
-    Remember that piece of the template that we were not using? The `{{ reloader|safe }}`? We will use it now!
-
-<script>
-(() => {
-    const socketUrl = "ws://localhost:8000/ws";
-    var ws = new WebSocket(socketUrl);
-    /*
-     * Hot Module Reload
-     */
-    ws.addEventListener('close',() => {
-        console.log('[WS:close]', 'HMR websocket closed.');
-
-        const interAttemptTimeoutMilliseconds = 100;
-        const maxAttempts = 5;
-        let attempts = 0;
-        const reloadIfCanConnect = () => {
-            attempts++ ;
-            if(attempts > maxAttempts){
-                console.error('[WS:error]', 'HMR could not reconnect to dev server.');
-                return;
-            }
-            socket = new WebSocket(socketUrl);
-            socket.addEventListener('error',()=>{
-                setTimeout(reloadIfCanConnect,interAttemptTimeoutMilliseconds);
-            });
-            socket.addEventListener('open',() => {
-                location.reload();
-            });
-        };
-        reloadIfCanConnect();
-    });
-})();
-</script>
 
 ## Limitations
 Doesn't keep state.
