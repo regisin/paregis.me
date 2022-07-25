@@ -1,13 +1,13 @@
 ---
 title: "FastAPI for frontend development with hot reload"
-date: 2022-07-31T00:00:01-05:00
-draft: true
+date: 2022-07-25T00:00:01-05:00
+draft: false
 description: "How to have hot reload when using Jinja templates with FastAPI."
 categories:
 - Tutorial
 ---
 
-**TL;DR**: In this post, I will be implementing a hot reload mechanism do I can use FastAPI for both front and backend development.
+**TL;DR**: In this post, I will be implementing a hot reload mechanism do I can use FastAPI for both front and backend development. Example code [repo here](https://github.com/regisin/fastapi-hmr).
 
 ## Introduction
 
@@ -51,11 +51,10 @@ I can't do a better job at teaching you about FastAPI than [its official documen
 
     Notice the `(env)` in front of the command line, that's how you know you are in the virtual environment.
 
-1. Install dependencies. This will all exist only in this folder because we are using `venv` (jinja might be installed with fastapi):
+1. Install dependencies. This will all exist only in this folder because we are using `venv`. `Jinja2` is included if you install `fastapi[all]`:
 
     ```bash
     (env) potato % pip install "fastapi[all]"
-    (env) potato % pip install jinja2
     ```
 
 1. Create the FastAPI app, mine is in `main.py`:
@@ -65,7 +64,7 @@ I can't do a better job at teaching you about FastAPI than [its official documen
     from fastapi.responses import HTMLResponse
     from fastapi.templating import Jinja2Templates
 
-    from app.utils import reloader
+    from utils import reloader
 
     templates = Jinja2Templates(directory="templates")
 
@@ -80,14 +79,13 @@ I can't do a better job at teaching you about FastAPI than [its official documen
     def home(request: Request):
         return views.TemplateResponse('Home.html', {"request": request,
                                                     "reloader": reloader,
-                                                    "title":"Tomato"})
+                                                    "title": "Tomato"})
 
     @app.websocket("/ws")
     async def websocket_endpoint(websocket: WebSocket):
         try:
             await websocket.accept()
-            while True:
-                pass
+            data = await websocket.receive_text()
         except WebSocketDisconnect:
             pass
     ```
@@ -126,8 +124,8 @@ I can't do a better job at teaching you about FastAPI than [its official documen
 
     ```python
     return views.TemplateResponse('Home.html', {"request": request,
-                                            "reloader":reloader,
-                                            "title":"Potato"})
+                                            "reloader": reloader,
+                                            "title": "Potato"})
     ```
 
     Same with the `{{ reloader|safe }}`, but this will be a JavaScript snippet that we still need to implement. `safe` here is to tell jinja that this variable is safe to render. Which it is, but you woulkdn't if you didn't know what was the contents of `reloader`.
@@ -179,16 +177,12 @@ I can't do a better job at teaching you about FastAPI than [its official documen
     <script>
     (() => {
         const socketUrl = "ws://localhost:8000/ws";
-        var ws = new WebSocket(socketUrl);
-        /*
-        * Hot Module Reload
-        */
-        ...
+        /* ... rest of code here */
     </script>
     """
     ```
 
-    So I can import in my FastAPI app (`from app.utils import reloader`).
+    So I can import in my FastAPI app (`from utils import reloader`).
 
 1. One last thing. Before you start the uvicorn server again, we need to tell it to watch for changes in `.html` files. By default it will only reload when it detects changes in `.py` files. It's an easy fix though, simply add a flag to the command line like this:
 
@@ -203,5 +197,6 @@ That's it! Now with the development server running, head on to your browser `htt
 
 ## Conclusion
 
-This is a very rudimentary hot module reload, and should only be used in dev, not in production. There's no complex state management on the frontend, but if that's what you need, go with a frontend framework like React or SvelteKit.
+This is a very rudimentary hot module reload, and should only be used in dev, not in production. There's no complex state management on the frontend, in which case you should move to a mature frontend framework like React.
 
+All in all, this thing really helps me test out changes in html using only python.
