@@ -1,4 +1,150 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tutorial on paregis.me</title><link>/categories/tutorial/</link><description>Recent content in Tutorial on paregis.me</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>All rights preserved.</copyright><lastBuildDate>Thu, 09 Dec 2021 00:00:01 -0500</lastBuildDate><atom:link href="/categories/tutorial/index.xml" rel="self" type="application/rss+xml"/><item><title>Building and Hosting a Static Website for Free on Github</title><link>/posts/building-and-hosting-a-static-website-for-free-on-github/</link><pubDate>Thu, 09 Dec 2021 00:00:01 -0500</pubDate><guid>/posts/building-and-hosting-a-static-website-for-free-on-github/</guid><description>Table of Content Building and hosting a static website for free on GitHub Recap Set up the GitHub.com account Create the account Create the website repository Uploading the new repository Cleaning up the repo with .gitignore A little more about branches and GitHub Pages Deploying by hand Deploy automatically with GitHub Actions Summary Recap We&amp;rsquo;ve been working on creating a static website using python with Jinja2. At this point we have a simple website with a couple of pages.</description><content>&lt;h2 id="table-of-content">Table of Content&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tutorial on paregis.me</title><link>/categories/tutorial/</link><description>Recent content in Tutorial on paregis.me</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><copyright>All rights preserved.</copyright><lastBuildDate>Mon, 25 Jul 2022 00:00:01 -0500</lastBuildDate><atom:link href="/categories/tutorial/index.xml" rel="self" type="application/rss+xml"/><item><title>FastAPI for frontend development with hot reload</title><link>/posts/fastapi-frontend-development/</link><pubDate>Mon, 25 Jul 2022 00:00:01 -0500</pubDate><guid>/posts/fastapi-frontend-development/</guid><description>TL;DR: In this post, I will be implementing a hot reload mechanism do I can use FastAPI for both front and backend development. Example code repo here.
+Introduction I&amp;rsquo;m a big fa of some frameworks out there. I like Svelte and sveltekit, I&amp;rsquo;ve used Strapi for this website&amp;rsquo;s backend for a couple of years, now I&amp;rsquo;m using Hugo to simplify my workflow. I have also been tinkering with FastAPI lately, yet another framework, this time for backend.</description><content>&lt;p>&lt;strong>TL;DR&lt;/strong>: In this post, I will be implementing a hot reload mechanism do I can use FastAPI for both front and backend development. Example code &lt;a href="https://github.com/regisin/fastapi-hmr">repo here&lt;/a>.&lt;/p>
+&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>I&amp;rsquo;m a big fa of some frameworks out there. I like Svelte and sveltekit, I&amp;rsquo;ve used Strapi for this website&amp;rsquo;s backend for a couple of years, now I&amp;rsquo;m using Hugo to simplify my workflow. I have also been tinkering with FastAPI lately, yet another framework, this time for backend. Each and every one of those have a purpose and try to solve some sort of problem.&lt;/p>
+&lt;p>While they do what they are meant to be, for me personally, the amount of different techs in a stack can get overwhelming. Yes I like using sveltekit for my frontend. Yes I like having a nice CMS in the backend. But sometimes all of these get in the way of being productive and prevent me from actually putting ideas to practice! That&amp;rsquo;s what I&amp;rsquo;m trying to fix, little by little.&lt;/p>
+&lt;p>The web, the http protocol specifically, is basically the same as it was back i the day. It trasfers text files from a server (backend) to the client (browser). Those files are then interpreted by the client and displayed on the screen. All of that to say that I don&amp;rsquo;t need a fancy frontend framework such as React/Vue/(Thor forbid)Angular/Svelte&amp;hellip; I can just generate html files and send them back to the client! The client doesn&amp;rsquo;t even need to do a single API call, just display the html. That&amp;rsquo;s one of the reasons I will be using FastAPI. The main goal is to develop an entire website using a minimal stack. If I can do it all using python, awesome!&lt;/p>
+&lt;p>&lt;em>Gosh, that&amp;rsquo;s a long text that could&amp;rsquo;ve stayed in my private notes or a journal. I got my eyes on you, pyscript!&lt;/em>&lt;/p>
+&lt;p>In short, FastAPI is a python framework that makes it easy to implement web APIs. It&amp;rsquo;s documentation (I think it&amp;rsquo;s more of a guided tutorial) is fantastic. I can&amp;rsquo;t possibly cover all of it, you should check it out if you&amp;rsquo;re not familiar with it but are still reading this text. :)&lt;/p>
+&lt;p>While FastAPI is great for what it does, it is NOT a frontend stack. However, it does support a very cool templating engine, Jinja2. With jinja I can essentially create a bunch of html templates, load it in python using FaspAPI, and inject data into it. The templates then form a valid html file that can be sent back to the client that made a request to the FastAPI backend.&lt;/p>
+&lt;p>One issue though, and perhaps something that we take for granted when we start developing a web app in a modern framework, is that while we develop and hit &lt;em>save&lt;/em>, our browser automatically updates with the new changes. That&amp;rsquo;s not really the case with FastAPI+Jinja. While FastAPI does have a &lt;em>reload&lt;/em> option (if you&amp;rsquo;re using uvicorn), it does NOT automatically refresh the browser tab that you have opened automatically! This behavior is called hot reload, or hot module reload, or something similar. It might not be a problem at first, but again, we kind of take if for granted with modern frameworks.&lt;/p>
+&lt;h2 id="solution-design">Solution design&lt;/h2>
+&lt;p>I&amp;rsquo;m not reinventing the wheel here. In fact, the solution already exists, just no one wrote a blog that uses FastAPI. I found the solution at &lt;a href="https://www.bscotch.net/post/create-a-live-reload-server">Create a live-reload server for front-end development&lt;/a>, where the backend is using NodeJS.&lt;/p>
+&lt;p>The idea is pretty straight forward: the dev web server, whiule running, listens to WebSocket on a specific endpoint. The client, when loaded by the browser, will connect to that WS endpoint (using some minimal JavaScript). When the server reloads, it will close all conections. The client, when detecting that a WS connection was lost, will try to reconnect for a few times: if it reconnects, means the server reloaded successfully, if not, time out after a a few tries. If the connection is reestablished, then the JavaScript in the client will trigger a page reload (same as you hitting F5 after every update to the server).&lt;/p>
+&lt;pre>&lt;code>&amp;gt; Note: this thing is only for development purposes. I would remove it from production!
+&lt;/code>&lt;/pre>
+&lt;p>Enough talking!&lt;/p>
+&lt;h2 id="morphcoding-time">Morph(Cod)ing time&lt;/h2>
+&lt;p>I can&amp;rsquo;t do a better job at teaching you about FastAPI than &lt;a href="fastapi.tiangolo.com/">its official documentation&lt;/a>. I&amp;rsquo;m using &lt;code>3.10&lt;/code>, but it could work with &lt;code>3.6&lt;/code> depending which FastAPI version you use. I&amp;rsquo;m also doing this on a macOS, so adapt the commands accordingly.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>New project, I like to use &lt;a href="https://docs.python.org/3/tutorial/venv.html">Virtual Environments&lt;/a> for each new python project.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>~ % mkdir potato
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~ % cd potato
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>potato % python3.10 -m venv env
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>potato % source env/bin/activate
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">(&lt;/span>env&lt;span style="color:#f92672">)&lt;/span> potato %
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Notice the &lt;code>(env)&lt;/code> in front of the command line, that&amp;rsquo;s how you know you are in the virtual environment.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Install dependencies. This will all exist only in this folder because we are using &lt;code>venv&lt;/code>. &lt;code>Jinja2&lt;/code> is included if you install &lt;code>fastapi[all]&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">(&lt;/span>env&lt;span style="color:#f92672">)&lt;/span> potato % pip install &lt;span style="color:#e6db74">&amp;#34;fastapi[all]&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Create the FastAPI app, mine is in &lt;code>main.py&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> fastapi &lt;span style="color:#f92672">import&lt;/span> FastAPI, Request, WebSocket, WebSocketDisconnect
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> fastapi.responses &lt;span style="color:#f92672">import&lt;/span> HTMLResponse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> fastapi.templating &lt;span style="color:#f92672">import&lt;/span> Jinja2Templates
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> utils &lt;span style="color:#f92672">import&lt;/span> reloader
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>templates &lt;span style="color:#f92672">=&lt;/span> Jinja2Templates(directory&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;templates&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>app &lt;span style="color:#f92672">=&lt;/span> FastAPI(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> title&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;Potato&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> openapi_url&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">None&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> docs_url&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">None&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> redoc_url&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">None&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">@app&lt;/span>&lt;span style="color:#f92672">.&lt;/span>get(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>, status_code&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">200&lt;/span>, response_class&lt;span style="color:#f92672">=&lt;/span>HTMLResponse)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">home&lt;/span>(request: Request):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> views&lt;span style="color:#f92672">.&lt;/span>TemplateResponse(&lt;span style="color:#e6db74">&amp;#39;Home.html&amp;#39;&lt;/span>, {&lt;span style="color:#e6db74">&amp;#34;request&amp;#34;&lt;/span>: request,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;reloader&amp;#34;&lt;/span>: reloader,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;title&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Tomato&amp;#34;&lt;/span>})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">@app&lt;/span>&lt;span style="color:#f92672">.&lt;/span>websocket(&lt;span style="color:#e6db74">&amp;#34;/ws&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">websocket_endpoint&lt;/span>(websocket: WebSocket):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">try&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> websocket&lt;span style="color:#f92672">.&lt;/span>accept()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> data &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">await&lt;/span> websocket&lt;span style="color:#f92672">.&lt;/span>receive_text()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">except&lt;/span> WebSocketDisconnect:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">pass&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The app has two endpoints:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>/&lt;/code>: which in this case will return a populated jinja template. This will be accessed through &lt;code>http://localhost:8000/&lt;/code>&lt;/li>
+&lt;li>&lt;code>/ws&lt;/code>: the websocket that will restart everytime the server reloads. It&amp;rsquo;s endpoint is &lt;code>ws://localhost:8000/ws&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;p>The home endpoint &lt;code>/&lt;/code> will read a template from the server (in the &lt;code>/templates&lt;/code> directory, we will get to the template itself next), pass a couple of data to it (the &lt;code>title&lt;/code> and &lt;code>reloader&lt;/code>, more on the reloader later), and return the final html back to the client when requested.&lt;/p>
+&lt;p>The WS endpoint has no real use except to exists! It doesn&amp;rsquo;t transfer any sort of data, it reeally is just so the client is able to notice when the server reloads (aka WS connection is lost). We are also cathing (excepting) the &lt;code>WebSocketDisconnect&lt;/code> because if not, everytime we reload the server, the terminal that is running will be polluted with a trace stack.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create the Jinja template in the &lt;code>templates&lt;/code> directory:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir templates
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>touch templates/Home.html
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Now open the &lt;code>templates/Home.html&lt;/code> and add the following:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-html" data-lang="html">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">html&lt;/span> &lt;span style="color:#a6e22e">lang&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;en&amp;#34;&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">head&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">title&lt;/span>&amp;gt;{{ title }}&amp;lt;/&lt;span style="color:#f92672">title&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">head&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">body&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;&lt;span style="color:#f92672">h1&lt;/span>&amp;gt;Tomatoes are fun!&amp;lt;/&lt;span style="color:#f92672">h1&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {{ reloader|safe }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">body&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">html&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This is a Jinja template. The &lt;code>{{ title }}&lt;/code> will be replaced by the parameters we pass with the FastAPI app from before:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">return&lt;/span> views&lt;span style="color:#f92672">.&lt;/span>TemplateResponse(&lt;span style="color:#e6db74">&amp;#39;Home.html&amp;#39;&lt;/span>, {&lt;span style="color:#e6db74">&amp;#34;request&amp;#34;&lt;/span>: request,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;reloader&amp;#34;&lt;/span>: reloader,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;title&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Potato&amp;#34;&lt;/span>})
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Same with the &lt;code>{{ reloader|safe }}&lt;/code>, but this will be a JavaScript snippet that we still need to implement. &lt;code>safe&lt;/code> here is to tell jinja that this variable is safe to render. Which it is, but you woulkdn&amp;rsquo;t if you didn&amp;rsquo;t know what was the contents of &lt;code>reloader&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The &lt;code>reloader&lt;/code> script:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-html" data-lang="html">&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">script&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>(() =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">socketUrl&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;ws://localhost:8000/ws&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#a6e22e">ws&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> &lt;span style="color:#a6e22e">WebSocket&lt;/span>(&lt;span style="color:#a6e22e">socketUrl&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">/*
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * Hot Module Reload
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ws&lt;/span>.&lt;span style="color:#a6e22e">addEventListener&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;close&amp;#39;&lt;/span>,() =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">interAttemptTimeoutMilliseconds&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">100&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">maxAttempts&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">5&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">let&lt;/span> &lt;span style="color:#a6e22e">attempts&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">const&lt;/span> &lt;span style="color:#a6e22e">reloadIfCanConnect&lt;/span> &lt;span style="color:#f92672">=&lt;/span> () =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">attempts&lt;/span>&lt;span style="color:#f92672">++&lt;/span> ;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span>(&lt;span style="color:#a6e22e">attempts&lt;/span> &lt;span style="color:#f92672">&amp;gt;&lt;/span> &lt;span style="color:#a6e22e">maxAttempts&lt;/span>){
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">console&lt;/span>.&lt;span style="color:#a6e22e">error&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;[WS:error]&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;HMR could not reconnect to dev server.&amp;#39;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">socket&lt;/span> &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> &lt;span style="color:#a6e22e">WebSocket&lt;/span>(&lt;span style="color:#a6e22e">socketUrl&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">socket&lt;/span>.&lt;span style="color:#a6e22e">addEventListener&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;error&amp;#39;&lt;/span>,()=&amp;gt;{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">setTimeout&lt;/span>(&lt;span style="color:#a6e22e">reloadIfCanConnect&lt;/span>,&lt;span style="color:#a6e22e">interAttemptTimeoutMilliseconds&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">socket&lt;/span>.&lt;span style="color:#a6e22e">addEventListener&lt;/span>(&lt;span style="color:#e6db74">&amp;#39;open&amp;#39;&lt;/span>,() =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">location&lt;/span>.&lt;span style="color:#a6e22e">reload&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">reloadIfCanConnect&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>})();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">script&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This snippet is modified from &lt;a href="https://www.bscotch.net/post/create-a-live-reload-server">Create a live-reload server for front-end development&lt;/a>. This will be injected in our html template before sending it to the browser.&lt;/p>
+&lt;p>Once the browser receives the html with that script, it will execute that self calling function. It will open a websocket connection to our websocket endpoint. When the connection closes, it will wait a few (&lt;code>100&lt;/code>) millisecconds and try to reconnect. Repeat up to &lt;code>5&lt;/code> times. If reconnected successfully, refresh the page with &lt;code>location.reload()&lt;/code>, aka &amp;ldquo;hot&amp;rdquo; reload the page.&lt;/p>
+&lt;p>To make things easier, wrap that in a python string. Mine is in &lt;code>utils.py&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>reloader &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;lt;script&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">(() =&amp;gt; {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> const socketUrl = &amp;#34;ws://localhost:8000/ws&amp;#34;;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> /* ... rest of code here */
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;lt;/script&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>So I can import in my FastAPI app (&lt;code>from utils import reloader&lt;/code>).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>One last thing. Before you start the uvicorn server again, we need to tell it to watch for changes in &lt;code>.html&lt;/code> files. By default it will only reload when it detects changes in &lt;code>.py&lt;/code> files. It&amp;rsquo;s an easy fix though, simply add a flag to the command line like this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">(&lt;/span>env&lt;span style="color:#f92672">)&lt;/span> potato % uvicorn main:app --reload --reload-include &lt;span style="color:#e6db74">&amp;#39;*.html&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;p>That&amp;rsquo;s it! Now with the development server running, head on to your browser &lt;code>http://localhost:8000/&lt;/code>, and try saving some change to the source files. For example:&lt;/p>
+&lt;ul>
+&lt;li>Change the prop in the &lt;code>main.py&lt;/code>: from &lt;code>&amp;quot;title&amp;quot;:&amp;quot;Tomato&amp;quot;&lt;/code> to &lt;code>&amp;quot;title&amp;quot;:&amp;quot;Potato&amp;quot;&lt;/code>.&lt;/li>
+&lt;li>Change the &lt;code>templates/Home.html&lt;/code> template: from &lt;code>&amp;lt;h1&amp;gt;Tomatoes are fun!&amp;lt;/h1&amp;gt;&lt;/code> to &lt;code>&amp;lt;h1&amp;gt;Potatoes are fun!&amp;lt;/h1&amp;gt;&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>This is a very rudimentary hot module reload, and should only be used in dev, not in production. There&amp;rsquo;s no complex state management on the frontend, in which case you should move to a mature frontend framework like React.&lt;/p>
+&lt;p>All in all, this thing really helps me test out changes in html using only python.&lt;/p></content></item><item><title>Building and Hosting a Static Website for Free on Github</title><link>/posts/building-and-hosting-a-static-website-for-free-on-github/</link><pubDate>Thu, 09 Dec 2021 00:00:01 -0500</pubDate><guid>/posts/building-and-hosting-a-static-website-for-free-on-github/</guid><description>Table of Content Building and hosting a static website for free on GitHub Recap Set up the GitHub.com account Create the account Create the website repository Uploading the new repository Cleaning up the repo with .gitignore A little more about branches and GitHub Pages Deploying by hand Deploy automatically with GitHub Actions Summary Recap We&amp;rsquo;ve been working on creating a static website using python with Jinja2. At this point we have a simple website with a couple of pages.</description><content>&lt;h2 id="table-of-content">Table of Content&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="#building-and-hosting-a-static-website-for-free-on-github">Building and hosting a static website for free on GitHub&lt;/a>&lt;/li>
 &lt;li>&lt;a href="#recap">Recap&lt;/a>&lt;/li>
