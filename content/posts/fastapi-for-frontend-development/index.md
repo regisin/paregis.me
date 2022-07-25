@@ -51,7 +51,7 @@ I can't do a better job at teaching you about FastAPI than [its official documen
 
     Notice the `(env)` in front of the command line, that's how you know you are in the virtual environment.
 
-1. Install dependencies. This will all exist only in this folder because we are using `venv`:
+1. Install dependencies. This will all exist only in this folder because we are using `venv` (jinja might be installed with fastapi):
 
     ```bash
     (env) potato % pip install "fastapi[all]"
@@ -61,7 +61,7 @@ I can't do a better job at teaching you about FastAPI than [its official documen
 1. Create the FastAPI app, mine is in `main.py`:
 
     ```python
-    from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+    from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
     from fastapi.responses import HTMLResponse
     from fastapi.templating import Jinja2Templates
 
@@ -80,7 +80,7 @@ I can't do a better job at teaching you about FastAPI than [its official documen
     def home(request: Request):
         return views.TemplateResponse('Home.html', {"request": request,
                                                     "reloader": reloader,
-                                                    "title":"Potato"})
+                                                    "title":"Tomato"})
 
     @app.websocket("/ws")
     async def websocket_endpoint(websocket: WebSocket):
@@ -168,11 +168,11 @@ I can't do a better job at teaching you about FastAPI than [its official documen
     </script>
     ```
 
-    This snippet is from [Create a live-reload server for front-end development](https://www.bscotch.net/post/create-a-live-reload-server). This will be injected in our html template before sending it to the browser.
+    This snippet is modified from [Create a live-reload server for front-end development](https://www.bscotch.net/post/create-a-live-reload-server). This will be injected in our html template before sending it to the browser.
 
-    Once the browser receives the html with that script, it will execute that self calling function. It will open a websocket connection to our websocket endpoint. When the connection closes, it will wait a few (`100`) miullisecconds and try to reconnect. Repeat up to 5 times. If reconnected successfully, refresh the page with `location.reload()`, aka "hot" reload the page.
+    Once the browser receives the html with that script, it will execute that self calling function. It will open a websocket connection to our websocket endpoint. When the connection closes, it will wait a few (`100`) millisecconds and try to reconnect. Repeat up to `5` times. If reconnected successfully, refresh the page with `location.reload()`, aka "hot" reload the page.
 
-    To make things easier, put that in a python format. Mine is in `utils.py`:
+    To make things easier, wrap that in a python string. Mine is in `utils.py`:
 
     ```python
     reloader = """
@@ -183,46 +183,25 @@ I can't do a better job at teaching you about FastAPI than [its official documen
         /*
         * Hot Module Reload
         */
-        ws.addEventListener('close',() => {
-            const interAttemptTimeoutMilliseconds = 100;
-            const maxAttempts = 5;
-            let attempts = 0;
-            const reloadIfCanConnect = () => {
-                attempts++ ;
-                if(attempts > maxAttempts){
-                    console.error('[WS:error]', 'HMR could not reconnect to dev server.');
-                    return;
-                }
-                socket = new WebSocket(socketUrl);
-                socket.addEventListener('error',()=>{
-                    setTimeout(reloadIfCanConnect,interAttemptTimeoutMilliseconds);
-                });
-                socket.addEventListener('open',() => {
-                    location.reload();
-                });
-            };
-            reloadIfCanConnect();
-        });
-    })();
+        ...
     </script>
     """
     ```
 
-    So I can import in my FastAPI app.
-    
-1. Now you can run your FastAPI app with uvicorn with `(env) potato % uvicorn main:app --reload`.
+    So I can import in my FastAPI app (`from app.utils import reloader`).
 
-    > **Great! We're done, right?**
-    
-    Not so fast! That `--reload` flag in the command will trigger the Uvicorn *server* to reload, it has nothing to do with the client. If you don't believe me, try changing `"title":"Potato"` to `"title":"Tomato"`.
+1. One last thing. Before you start the uvicorn server again, we need to tell it to watch for changes in `.html` files. By default it will only reload when it detects changes in `.py` files. It's an easy fix though, simply add a flag to the command line like this:
 
-1. Tell uvicorn to watch template files too. By default, uvicorn will trigger a reload whenever a `.py` file is changed in the project directories. To make it also reload when `.html` files are edited, run the server like this: `(env) potato % uvicorn main:app --reload --reload-include '*.html'`. Now try modifying `templates/Home.html` and save itand watch the console where the server is running reload.
+    ```bash
+    (env) potato % uvicorn main:app --reload --reload-include '*.html'
+    ```
 
-    Awesome, now whenever we modify a `.py` OR `.html` files, the server will take notice and reload. However, if you had your browser opened on the dev server `http://localhost:8000`, you will not see the changes unless you refresh it.
-    
-    That's kind of annoying... sure I can hit `F5` all the time, but it gets old fast! We need to trigger that same reload to happen in the browser.
+That's it! Now with the development server running, head on to your browser `http://localhost:8000/`, and try saving some change to the source files. For example:
 
-## Limitations
-Doesn't keep state.
+- Change the prop in the `main.py`: from `"title":"Tomato"` to `"title":"Potato"`.
+- Change the `templates/Home.html` template: from `<h1>Tomatoes are fun!</h1>` to `<h1>Potatoes are fun!</h1>`.
 
-## Summary
+## Conclusion
+
+This is a very rudimentary hot module reload, and should only be used in dev, not in production. There's no complex state management on the frontend, but if that's what you need, go with a frontend framework like React or SvelteKit.
+
