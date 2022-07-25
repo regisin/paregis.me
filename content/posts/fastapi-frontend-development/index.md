@@ -11,7 +11,7 @@ categories:
 
 ## Introduction
 
-I'm a big fa of some frameworks out there. I like Svelte and sveltekit, I've used Strapi for this website's backend for a couple of years, now I'm using Hugo to simplify my workflow. I have also been tinkering with FastAPI lately, yet another framework, this time for backend. Each and every one of those have a purpose and try to solve some sort of problem.
+I'm a big fa of some frameworks out there. I like Svelte and [sveltekit](https://kit.svelte.dev/), I've used [Strapi](https://strapi.io/) for this website's backend for a couple of years, now I'm using Hugo to simplify my workflow. I have also been tinkering with [FastAPI](https://fastapi.tiangolo.com/), yet another framework, this time for backend. Each and every one of those have a purpose and try to solve some sort of problem.
 
 While they do what they are meant to be, for me personally, the amount of different techs in a stack can get overwhelming. Yes I like using sveltekit for my frontend. Yes I like having a nice CMS in the backend. But sometimes all of these get in the way of being productive and prevent me from actually putting ideas to practice! That's what I'm trying to fix, little by little.
 
@@ -21,7 +21,7 @@ The web, the http protocol specifically, is basically the same as it was back i 
 
 In short, FastAPI is a python framework that makes it easy to implement web APIs. It's documentation (I think it's more of a guided tutorial) is fantastic. I can't possibly cover all of it, you should check it out if you're not familiar with it but are still reading this text. :)
 
-While FastAPI is great for what it does, it is NOT a frontend stack. However, it does support a very cool templating engine, Jinja2. With jinja I can essentially create a bunch of html templates, load it in python using FaspAPI, and inject data into it. The templates then form a valid html file that can be sent back to the client that made a request to the FastAPI backend.
+While FastAPI is great for what it does, it is NOT a frontend stack. However, it does support a very cool templating engine, [Jinja2](https://jinja.palletsprojects.com/en/3.1.x/). With jinja I can essentially create a bunch of html templates, load it in python using FaspAPI, and inject data into it. The templates then form a valid html file that can be sent back to the client that made a request to the FastAPI backend.
 
 One issue though, and perhaps something that we take for granted when we start developing a web app in a modern framework, is that while we develop and hit *save*, our browser automatically updates with the new changes. That's not really the case with FastAPI+Jinja. While FastAPI does have a *reload* option (if you're using uvicorn), it does NOT automatically refresh the browser tab that you have opened automatically! This behavior is called hot reload, or hot module reload, or something similar. It might not be a problem at first, but again, we kind of take if for granted with modern frameworks.
 
