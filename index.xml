@@ -144,7 +144,27 @@ Introduction I&amp;rsquo;m a big fa of some frameworks out there. I like Svelte 
 &lt;/ul>
 &lt;h2 id="conclusion">Conclusion&lt;/h2>
 &lt;p>This is a very rudimentary hot module reload, and should only be used in dev, not in production. There&amp;rsquo;s no complex state management on the frontend, in which case you should move to a mature frontend framework like React.&lt;/p>
-&lt;p>All in all, this thing really helps me test out changes in html using only python.&lt;/p></content></item><item><title>Building and Hosting a Static Website for Free on Github</title><link>/posts/building-and-hosting-a-static-website-for-free-on-github/</link><pubDate>Thu, 09 Dec 2021 00:00:01 -0500</pubDate><guid>/posts/building-and-hosting-a-static-website-for-free-on-github/</guid><description>Table of Content Building and hosting a static website for free on GitHub Recap Set up the GitHub.com account Create the account Create the website repository Uploading the new repository Cleaning up the repo with .gitignore A little more about branches and GitHub Pages Deploying by hand Deploy automatically with GitHub Actions Summary Recap We&amp;rsquo;ve been working on creating a static website using python with Jinja2. At this point we have a simple website with a couple of pages.</description><content>&lt;h2 id="table-of-content">Table of Content&lt;/h2>
+&lt;p>All in all, this thing really helps me test out changes in html using only python.&lt;/p></content></item><item><title>About</title><link>/about/</link><pubDate>Wed, 08 Jun 2022 14:30:04 -0500</pubDate><guid>/about/</guid><description>About I&amp;rsquo;m Paulo, I am an Assistant Professor at Southeastern Louisiana University. I teach mostly programming and networking courses in the Computer Science department, you can check the full list on the teaching page. I also do some research on drones and IoT networks, all publications are in the, well, publications page.
+This is my personal website, so the things I post might not be strictly about work. Just the interesting stuff I come across IRL and the interwebs!</description><content>&lt;h1 id="about">About&lt;/h1>
+&lt;p>I&amp;rsquo;m Paulo, I am an Assistant Professor at Southeastern Louisiana University. I teach mostly programming and networking courses in the Computer Science department, you can check the full list on the teaching page. I also do some research on drones and IoT networks, all publications are in the, well, publications page.&lt;/p>
+&lt;p>This is my personal website, so the things I post might not be strictly about work. Just the interesting stuff I come across IRL and the interwebs!&lt;/p>
+&lt;p>For now, here&amp;rsquo;s a photo I really like that I took in the bay area:&lt;/p>
+&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="/about/images/SF_hue9675bf2a167e4d68149236b8388dbe8_1408433_1500x0_resize_q75_box.jpg">
+&lt;img
+alt="San Francisco" title="San Francisco" src="images/SF.jpg">
+&lt;/picture>
+&lt;/p>
+&lt;/p></content></item><item><title>Building and Hosting a Static Website for Free on Github</title><link>/posts/building-and-hosting-a-static-website-for-free-on-github/</link><pubDate>Thu, 09 Dec 2021 00:00:01 -0500</pubDate><guid>/posts/building-and-hosting-a-static-website-for-free-on-github/</guid><description>Table of Content Building and hosting a static website for free on GitHub Recap Set up the GitHub.com account Create the account Create the website repository Uploading the new repository Cleaning up the repo with .gitignore A little more about branches and GitHub Pages Deploying by hand Deploy automatically with GitHub Actions Summary Recap We&amp;rsquo;ve been working on creating a static website using python with Jinja2. At this point we have a simple website with a couple of pages.</description><content>&lt;h2 id="table-of-content">Table of Content&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="#building-and-hosting-a-static-website-for-free-on-github">Building and hosting a static website for free on GitHub&lt;/a>&lt;/li>
 &lt;li>&lt;a href="#recap">Recap&lt;/a>&lt;/li>
@@ -180,12 +200,57 @@ Introduction I&amp;rsquo;m a big fa of some frameworks out there. I like Svelte 
 &lt;p>After creating the account, you will have a dedicated link: &lt;code>https://github.com/&amp;lt;your username&amp;gt;&lt;/code>. This page will list all of the GitHub &lt;em>repositories&lt;/em> that you work with. Repositories (repos for short) are essentially all the different coding projects that you have. GitHub is a place where you can store your projects online. I won&amp;rsquo;t get into much details about &lt;code>git&lt;/code> and &lt;code>GitHub&lt;/code>, in a nutshell GitHub is a website that you can store your &lt;code>git&lt;/code> projects, and &lt;code>git&lt;/code> is a tool that helps developer to keep track of changes in source-code. &lt;code>git&lt;/code> is used locally, in your machine, and GitHub is the website that you can save these projects to. So if you loose your computer, for example, your projects will still be available online.&lt;/p>
 &lt;h3 id="create-the-website-repository">Create the website repository&lt;/h3>
 &lt;p>GitHub has this very cool feature that let&amp;rsquo;s you host webpages for free, and we will use it here. In your account, go ahead and create a new repo:&lt;/p>
-&lt;p>&lt;img src="images/Screen_Shot_2021_12_09_at_11_11_14_401b895d8d.png" alt="New repository">&lt;/p>
+&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="">
+&lt;img
+alt="New repository" title="New repository" src="images/Screen_Shot_2021_12_09_at_11_11_14_401b895d8d.png">
+&lt;/picture>
+&lt;/p>
+&lt;/p>
 &lt;p>The name of the repository is very important in this particular case. We need to name the repository as &lt;code>&amp;lt;your username&amp;gt;.github.io&lt;/code>. Normally you can choose whatever name you&amp;rsquo;d like, but to be able to have our own website we need to follow that pattern. This repository will be the link to our website when we finish: &lt;code>https://&amp;lt;your username&amp;gt;.github.io&lt;/code>.&lt;/p>
-&lt;p>&lt;img src="images/Screen_Shot_2021_12_09_at_11_11_41_4cfad89bbc.png" alt="Naming new repository">&lt;/p>
+&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="">
+&lt;img
+alt="Naming new repository" title="Naming new repository" src="images/Screen_Shot_2021_12_09_at_11_11_41_4cfad89bbc.png">
+&lt;/picture>
+&lt;/p>
+&lt;/p>
 &lt;h3 id="uploading-the-new-repository">Uploading the new repository&lt;/h3>
 &lt;p>After creating the repo, it will be empty by default, and we need to upload our files to it. There are different ways to do it as you can see:&lt;/p>
-&lt;p>&lt;img src="images/Screen_Shot_2021_12_09_at_11_13_02_0e2447f0be.png" alt="Repository created">&lt;/p>
+&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="/posts/building-and-hosting-a-static-website-for-free-on-github/images/Screen_Shot_2021_12_09_at_11_13_02_0e2447f0be_huef304e05f4fb2de2b34da8a24a27e40f_75984_500x0_resize_box_3.png">
+&lt;img
+alt="Repository created" title="Repository created" src="images/Screen_Shot_2021_12_09_at_11_13_02_0e2447f0be.png">
+&lt;/picture>
+&lt;/p>
+&lt;/p>
 &lt;p>I&amp;rsquo;ll be using the first option with a little teak. First, I need to install &lt;code>git&lt;/code> on my computer. I won&amp;rsquo;t explain how to do that because it can vary from different operating systems. You can google &lt;code>how to install git&lt;/code> and I&amp;rsquo;m sure plenty of results will show up. At the end of it, we need to be able to use the &lt;code>git&lt;/code> command from our bash terminal. So let&amp;rsquo;s open up the terminal and &lt;code>cd&lt;/code> into the project folder:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cd /path/to/project/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;# My static website&amp;#34;&lt;/span> &amp;gt;&amp;gt; README.md
@@ -196,7 +261,22 @@ Introduction I&amp;rsquo;m a big fa of some frameworks out there. I like Svelte 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git remote add origin https://github.com/&amp;lt;your username&amp;gt;/&amp;lt;your username&amp;gt;.github.io
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The &lt;code>echo&lt;/code> command will just create a text file named &lt;code>README.md&lt;/code> and write &lt;code># My static website&lt;/code> on it, GitHub recommends every repository to have a read-me file so that&amp;rsquo;s what I did. Then we just follow the instructions, the only difference is that I use &lt;code>git add .&lt;/code> instead of &lt;code>git add README.md&lt;/code>, and that&amp;rsquo;s because our project already has several files that we created, and not just the &amp;ldquo;read me&amp;rdquo;, so we add all files to the repo that way. The rest of the commands will commit the code to the local repo (which is kind of a checkpoint, saving your progress). Then it will name a &lt;code>branch&lt;/code> &lt;em>main&lt;/em> (a branch is kind of a version of your project and &lt;code>main&lt;/code> being, well, the most important one) branches are hard to explain, you might be better off by googling about it if you want. We then map the local repo just created to the remote one, the one we created using GitHub. Lastly, we &lt;code>push&lt;/code> the code from the commit to the remote repo!&lt;/p>
 &lt;p>After the &lt;code>git push&lt;/code> runs successfully, you can go to the GitHub page (&lt;code>https://github.com/&amp;lt;your username&amp;gt;/&amp;lt;your username&amp;gt;.github.io&lt;/code>) and refresh it and you should now see all your project files there:&lt;/p>
-&lt;p>&lt;img src="images/Screen_Shot_2021_12_09_at_11_53_12_c6569e6323.png" alt="First commit">&lt;/p>
+&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="/posts/building-and-hosting-a-static-website-for-free-on-github/images/Screen_Shot_2021_12_09_at_11_53_12_c6569e6323_hu499829b7b57f1a284a79b72124e51624_38650_500x0_resize_box_3.png">
+&lt;img
+alt="First commit" title="First commit" src="images/Screen_Shot_2021_12_09_at_11_53_12_c6569e6323.png">
+&lt;/picture>
+&lt;/p>
+&lt;/p>
 &lt;h3 id="cleaning-up-the-repo-with-gitignore">Cleaning up the repo with &lt;code>.gitignore&lt;/code>&lt;/h3>
 &lt;p>If you notice there&amp;rsquo;s a bunch of &amp;ldquo;junk&amp;rdquo; files in the repository:&lt;/p>
 &lt;ol>
@@ -216,7 +296,22 @@ Introduction I&amp;rsquo;m a big fa of some frameworks out there. I like Svelte 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git commit -m &lt;span style="color:#e6db74">&amp;#34;Added gitignore&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git push -u origin main
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Because originally I didn&amp;rsquo;t exclude the files and actually committed and pushed them to the repo (I didn&amp;rsquo;t have &lt;code>.gitignore&lt;/code> yet), I have to first remove all the files from the repo. Then I add all the files again with &lt;code>git add .&lt;/code>, this time respecting the &lt;code>.gitignore&lt;/code> rules, and finally create a new commit and push to GitHub. Now the repository does not list those junk files anymore.&lt;/p>
-&lt;p>&lt;img src="images/Screen_Shot_2021_12_09_at_13_48_02_85494b771c.png" alt="Add .gitignore file">&lt;/p>
+&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="">
+&lt;img
+alt="Add .gitignore file" title="Add .gitignore file" src="images/Screen_Shot_2021_12_09_at_13_48_02_85494b771c.png">
+&lt;/picture>
+&lt;/p>
+&lt;/p>
 &lt;p>&lt;em>Note: &amp;ldquo;committing&amp;rdquo; and &amp;ldquo;pushing&amp;rdquo; is something you will do quite often for even a single project, don&amp;rsquo;t be afraid of committing frequently to the same repository.&lt;/em>&lt;/p>
 &lt;h2 id="a-little-more-about-branches-and-github-pages">A little more about branches and GitHub Pages&lt;/h2>
 &lt;p>I know I know, I said you&amp;rsquo;re better off googling what branches are than learning from me. Still true! Branches are a big topic, and if you end up using &lt;code>git&lt;/code> and GitHub professionally, working on teams, you will learn that it can be used in different ways. For our use case we can thing of branches being completely different repositories (or sub-repositories if you will): one for source code (development), one for built code (production).&lt;/p>
@@ -224,11 +319,67 @@ Introduction I&amp;rsquo;m a big fa of some frameworks out there. I like Svelte 
 &lt;p>The production branch will be named &lt;code>gh-pages&lt;/code>, which is short for &lt;em>GitHub Pages&lt;/em>. GitHub Pages is, well, a github thing. Each repository that you create you can create a GitHub Page for it. The way it works is quite simple: you configure your repository to enable GitHub Pages, then you select which branch of the repo will have the files for the pages.&lt;/p>
 &lt;p>The &lt;code>&amp;lt;your username&amp;gt;.github.io&lt;/code> repo is special, that&amp;rsquo;s the place you can showoff all of your projects, all of your repos. Each repo can also have its own pages set up, which will make &lt;code>&amp;lt;your username&amp;gt;.github.io/&amp;lt;your awesome repo&amp;gt;&lt;/code> page be available! We won&amp;rsquo;t go that far in this post, though. We will only work with the &lt;code>&amp;lt;username&amp;gt;.github.io&lt;/code> repository.&lt;/p>
 &lt;p>We still have to create this second branch though, the &lt;code>gh-pages&lt;/code> branch. It&amp;rsquo;s quite simple: head to the repository website on your browser &lt;code>https://github.com/&amp;lt;your username&amp;gt;/&amp;lt;your username&amp;gt;.github.io/&lt;/code>, then click on the branches drop-down button and create the branch right there:&lt;/p>
-&lt;p>&lt;img src="images/Screen_Shot_2021_12_09_at_13_37_19_1f3be06272.png" alt="New gh-pages branch">&lt;/p>
+&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="">
+&lt;img
+alt="New gh-pages branch" title="New gh-pages branch" src="images/Screen_Shot_2021_12_09_at_13_37_19_1f3be06272.png">
+&lt;/picture>
+&lt;/p>
+&lt;/p>
 &lt;p>Now we can go to the repository settings, and tell that the website should be pointing to the &lt;code>gh-pages&lt;/code> branch and not &lt;code>main&lt;/code>. Settings &amp;gt; Pages:&lt;/p>
-&lt;p>&lt;img src="images/Screen_Shot_2021_12_09_at_14_02_20_69cbcfacb6.png" alt="Repository settings">
-&lt;img src="images/Screen_Shot_2021_12_09_at_14_02_42_ff85a36167.png" alt="Pages settings">
-&lt;img src="images/Screen_Shot_2021_12_09_at_14_02_51_862727c4e0.png" alt="Select gh-pages in the pages settings">&lt;/p>
+&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="">
+&lt;img
+alt="Repository settings" title="Repository settings" src="images/Screen_Shot_2021_12_09_at_14_02_20_69cbcfacb6.png">
+&lt;/picture>
+&lt;/p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="/posts/building-and-hosting-a-static-website-for-free-on-github/images/Screen_Shot_2021_12_09_at_14_02_42_ff85a36167_hub15d3b947c5927301399fd479b429575_81503_500x0_resize_box_3.png">
+&lt;img
+alt="Pages settings" title="Pages settings" src="images/Screen_Shot_2021_12_09_at_14_02_42_ff85a36167.png">
+&lt;/picture>
+&lt;/p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="">
+&lt;img
+alt="Select gh-pages in the pages settings" title="Select gh-pages in the pages settings" src="images/Screen_Shot_2021_12_09_at_14_02_51_862727c4e0.png">
+&lt;/picture>
+&lt;/p>
+&lt;/p>
 &lt;p>After saving it, the &lt;code>https://&amp;lt;username&amp;gt;github.io&lt;/code> website will be serving the files from the &lt;code>gh-pages&lt;/code>. Right now, nothing changed because when we created the new branch we just copied all of the files from the &lt;code>main&lt;/code> branch, which is the default behavior. What we need to do now is build the website and only upload to the &lt;code>gh-pages&lt;/code> branch the files inside the &lt;code>/_site&lt;/code> folder.&lt;/p>
 &lt;h3 id="deploying-by-hand">Deploying by hand&lt;/h3>
 &lt;p>&lt;em>Note: this section will have some more &lt;code>git&lt;/code> commands that at the end of the post will be irrelevant. This is deploying the hard way. If you just want you can skip to the cool and easy stuff in the next section.&lt;/em>&lt;/p>
@@ -296,15 +447,60 @@ Introduction I&amp;rsquo;m a big fa of some frameworks out there. I like Svelte 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git commit -m &lt;span style="color:#e6db74">&amp;#34;Added build action&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git push -u origin main
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After you &lt;code>push&lt;/code>, you can even go to the repo&amp;rsquo;s &lt;code>Action&lt;/code> menu and see for yourself the progress of the build:&lt;/p>
-&lt;p>&lt;img src="images/Screen_Shot_2021_12_09_at_15_17_46_5592becbd2.png" alt="GitHub Actions">&lt;/p>
+&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="/posts/building-and-hosting-a-static-website-for-free-on-github/images/Screen_Shot_2021_12_09_at_15_17_46_5592becbd2_hu4d88469705f2186a6b82bbc80e158069_412151_1500x0_resize_box_3.png">
+&lt;img
+alt="GitHub Actions" title="GitHub Actions" src="images/Screen_Shot_2021_12_09_at_15_17_46_5592becbd2.png">
+&lt;/picture>
+&lt;/p>
+&lt;/p>
 &lt;p>If successful, you can now visit the website at &lt;code>https://&amp;lt;username&amp;gt;.github.io&lt;/code> and it should work just fine..&lt;/p>
 &lt;p>One last thing though! In my case, I have been using static assets (if you remember from previous posts), and at some point I configured in the &lt;code>build.py&lt;/code> script the &lt;code>BASE_URL='http://localhost:8000'&lt;/code> constant. If I visit &lt;code>https://regisin.github.io/research&lt;/code> it doesn&amp;rsquo;t load the images&amp;hellip; because they are pointing to &lt;code>localhost&lt;/code> which is not really what I want.&lt;/p>
-&lt;p>&lt;img src="images/Screen_Shot_2021_12_09_at_15_20_24_7a9dd37c36.png" alt="Hosted website with wrong configuration">&lt;/p>
+&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="/posts/building-and-hosting-a-static-website-for-free-on-github/images/Screen_Shot_2021_12_09_at_15_20_24_7a9dd37c36_hub894bde878ced8f219d9d9957056f95b_18330_500x0_resize_box_3.png">
+&lt;img
+alt="Hosted website with wrong configuration" title="Hosted website with wrong configuration" src="images/Screen_Shot_2021_12_09_at_15_20_24_7a9dd37c36.png">
+&lt;/picture>
+&lt;/p>
+&lt;/p>
 &lt;p>Since now the website is being hosted remotely on GitHub, I need to change it to: &lt;code>BASE_URL='https://regisin.github.io'&lt;/code>. One last push&amp;hellip;&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git add .
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git commit -m &lt;span style="color:#e6db74">&amp;#34;Added build action&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git push -u origin main
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="images/Screen_Shot_2021_12_09_at_15_22_01_bccb068de1.png" alt="Hosted website with correct configuration">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="">
+&lt;img
+alt="Hosted website with correct configuration" title="Hosted website with correct configuration" src="images/Screen_Shot_2021_12_09_at_15_22_01_bccb068de1.png">
+&lt;/picture>
+&lt;/p>
+&lt;/p>
 &lt;p>And we&amp;rsquo;re done! Phew, not a lot of coding, more configuration than anything else&amp;hellip;&lt;/p>
 &lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>In this post we:&lt;/p>
@@ -463,11 +659,27 @@ Introduction I&amp;rsquo;m a big fa of some frameworks out there. I like Svelte 
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Cool, we now have a nice little menu at the top and a useless footer at the bottom of every page&amp;hellip; but I think I&amp;rsquo;m forgetting something&amp;hellip; oh yeah, the initial page!&lt;/p>
 &lt;h2 id="the-face-of-the-website">The face of the website&lt;/h2>
 &lt;p>If I visit my site at &lt;code>http://localhost:8000&lt;/code> it looks weird, like it a file explorer, listing all the folders and files in the build dir &lt;code>/_site&lt;/code>. That is the default behavior of the python webserver we use. If there is no &lt;code>index.html&lt;/code> it will list the files of the folder. While that&amp;rsquo;s ok while you are developing on your own computer, it is definitely not a good thing to have that hapopen when your website is actually hosted on an actual server.&lt;/p>
-&lt;p>&lt;img src="https://res.cloudinary.com/regisin/image/upload/v1637705994/Screen_Shot_2021_11_23_at_15_53_21_ff03f61306.png" alt="Directory listing">&lt;/p>
+&lt;p>
+&lt;/p>
 &lt;p>In fact, that is usually NOT the default behavior of hosted webservers out there. To disable this on the python webserver is easy, we just add &lt;code>-d False&lt;/code> to the command line:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python3 -m http.server --directory ./_site -d False
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Now if I navigate to &lt;code>localhost:8000&lt;/code> it returns the infamous &lt;code>404 Not Found&lt;/code> page:&lt;/p>
-&lt;p>&lt;img src="images/Screen_Shot_2021_11_23_at_15_54_55_bd13ff7fb9.png" alt="404 Not Found">&lt;/p>
+&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="/posts/the-forgotten-page/images/Screen_Shot_2021_11_23_at_15_54_55_bd13ff7fb9_hu6132ac2e5ba9529c4c1638d231462fd9_78605_800x0_resize_box_3.png">
+&lt;img
+alt="404 Not Found" title="404 Not Found" src="images/Screen_Shot_2021_11_23_at_15_54_55_bd13ff7fb9.png">
+&lt;/picture>
+&lt;/p>
+&lt;/p>
 &lt;h3 id="finally-the-disappointing-front-page">Finally, the (disappointing) front page&lt;/h3>
 &lt;p>Cool, but wnow I need to decide what the face of my website will be. In practice it could be many different things. Some personal websites are blogs, so their initial page is the list of blog posts. Others provide an intro to the website explaining what it is about. Well, I already have an &lt;code>/about&lt;/code> page created, and since I&amp;rsquo;m feeling lazy right now, I will just reuse it, so the home (&lt;code>localhost:8000/&lt;/code>) as well as the about (&lt;code>localhost:8000/about&lt;/code>) will be the exact same thing.&lt;/p>
 &lt;p>In my build script I&amp;rsquo;ll add this at the beginning:&lt;/p>
@@ -1105,7 +1317,22 @@ If you have been following this tutorial series, you&amp;rsquo;ll notice that th
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python built.py
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>python3 -m http.server --directory ./_site
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then navigate in your browser to &lt;code>localhost:8000/teaching.html&lt;/code>, &lt;em>Ta-Da&lt;/em>!&lt;/p>
-&lt;p>&lt;img src="images/Screen_Shot_2021_11_11_at_11_19_23_bb658d57f2.png" alt="Serving the website">&lt;/p>
+&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="/posts/separating-data-from-the-rest/images/Screen_Shot_2021_11_11_at_11_19_23_bb658d57f2_hu2301602a29be7ec7ca5ea683d9dcedeb_107638_500x0_resize_box_3.png">
+&lt;img
+alt="Serving the website" title="Serving the website" src="images/Screen_Shot_2021_11_11_at_11_19_23_bb658d57f2.png">
+&lt;/picture>
+&lt;/p>
+&lt;/p>
 &lt;p>You can use the for loops just like you would in the python code. They are great for tabular data like this courses example.&lt;/p>
 &lt;h2 id="summary">Summary&lt;/h2>
 &lt;p>Here&amp;rsquo;s a summary of what we did:&lt;/p>
@@ -1181,9 +1408,50 @@ In this post, we will go one step further in our static website development. We 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">with&lt;/span> o&lt;span style="color:#f92672">.&lt;/span>open(mode&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;w&amp;#39;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> fh:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fh&lt;span style="color:#f92672">.&lt;/span>write(output)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Now when I run the build script, I will see &lt;code>2&lt;/code> files in the &lt;code>/_site&lt;/code> folder&amp;hellip; Oops, I actually see 3, the &lt;code>index.html&lt;/code> file, from the hello example is still there! I need to delete it, but I&amp;rsquo;ll deal with it later. Let&amp;rsquo;s checkout the newly rendered pages. Remember you can spin up using python with &lt;code>python3 -m http.server --directory ./_site/&lt;/code> from the terminal inside your project folder.&lt;/p>
-&lt;p>&lt;img src="images/Screen_Shot_2021_11_09_at_13_52_45_d3964349a4.png" alt="The index page at localhost:8000">
-&lt;img src="images/Screen_Shot_2021_11_09_at_13_52_51_552c69e5a2.png" alt="About page at localhost:8000/about.html">
-&lt;img src="images/Screen_Shot_2021_11_09_at_13_52_56_a187b02fff.png" alt="Teaching page at localhost:8000/teaching.html">&lt;/p>
+&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="/posts/creating-templates/images/Screen_Shot_2021_11_09_at_13_52_45_d3964349a4_hudab7d86a5472e249896f085d55b737a9_63108_800x0_resize_box_3.png">
+&lt;img
+alt="The index page at localhost:8000" title="The index page at localhost:8000" src="images/Screen_Shot_2021_11_09_at_13_52_45_d3964349a4.png">
+&lt;/picture>
+&lt;/p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="/posts/creating-templates/images/Screen_Shot_2021_11_09_at_13_52_51_552c69e5a2_hu5e7efedfe416e431117ee87eb09ac78c_61112_800x0_resize_box_3.png">
+&lt;img
+alt="About page at localhost:8000/about.html" title="About page at localhost:8000/about.html" src="images/Screen_Shot_2021_11_09_at_13_52_51_552c69e5a2.png">
+&lt;/picture>
+&lt;/p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="">
+&lt;source media="(max-width: 992px)"
+srcset="">
+&lt;source media="(max-width: 1400px)"
+srcset="">
+&lt;source media="(min-width: 1600px)"
+srcset="/posts/creating-templates/images/Screen_Shot_2021_11_09_at_13_52_56_a187b02fff_hu5a4d7683d7fb5a03ca32ce4fe369b75c_79060_800x0_resize_box_3.png">
+&lt;img
+alt="Teaching page at localhost:8000/teaching.html" title="Teaching page at localhost:8000/teaching.html" src="images/Screen_Shot_2021_11_09_at_13_52_56_a187b02fff.png">
+&lt;/picture>
+&lt;/p>
+&lt;/p>
 &lt;p>Awesome, it&amp;rsquo;s working! We will deal with the awkward index page in a different post.&lt;/p>
 &lt;p>Now back to the templates. If you notice there are some repetitive &lt;code>html&lt;/code> tags that we had to put in both files, for example, the &lt;code>&amp;lt;html&amp;gt;&lt;/code>, &lt;code>&amp;lt;head&amp;gt;&lt;/code> and &lt;code>&amp;lt;body&amp;gt;&lt;/code> tags. For these couple of pages that&amp;rsquo;s absolutely alright, but imagine if your website has more pages. Maybe you&amp;rsquo;ll have a blog page, then a projects page&amp;hellip; the more pages you create, the more you will have to remember to edit if you want to change. For example, the title formatting, or the font of the entire website; you&amp;rsquo;d have to open each template, and make the exact same edit in each of them. &lt;strong>We can do better!&lt;/strong>&lt;/p>
 &lt;p>Luckily, we can use Jinja&amp;rsquo;s awesome engine to the rescue!&lt;/p>
