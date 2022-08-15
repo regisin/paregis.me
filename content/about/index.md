@@ -15,4 +15,4 @@ This is my personal website, so the things I post might not be strictly about wo
 
 For now, here's a photo I really like that I took in the bay area:
 
-![San Francisco](images/IMG_8235_EFFECTS_6a69708948.jpg)
+![San Francisco](images/SF.jpg)
