@@ -59,9 +59,11 @@ image size, as Hugo will upscale small images */}}
     <source media="(min-width: 1600px)" 
         srcset="{{with $large.RelPermalink }}{{.}}{{ end }}">
     
-    <img 
- 
-   alt="{{ $alt }}" title="{{ $alt }}" src="{{ $src }}">
+    {{ if gt $src.Width 1500 }}
+    <img alt="{{ $alt }}" title="{{ $alt }}" src="{{ $large.RelPermalink }}">
+    {{ else }}
+    <img alt="{{ $alt }}" title="{{ $alt }}" src="{{ $src }}">
+    {{ end }}
 
 </picture>
 </p>
