@@ -21,13 +21,13 @@
 
 
 {{ if gt $src.Width 500 }}
-{{ $data.Set "large" ($src.Resize $tinyw) }}
+{{ $data.Set "tiny" ($src.Resize $tinyw) }}
 {{ end }}
 {{ if gt $src.Width 800 }}
-{{ $data.Set "large" ($src.Resize $smallw) }}
+{{ $data.Set "small" ($src.Resize $smallw) }}
 {{ end }}
 {{ if gt $src.Width 1200 }}
-{{ $data.Set "large" ($src.Resize $mediumw) }}
+{{ $data.Set "medium" ($src.Resize $mediumw) }}
 {{ end }}
 {{ if gt $src.Width 1500 }}
 {{ $data.Set "large" ($src.Resize $largew) }}
@@ -60,7 +60,7 @@ image size, as Hugo will upscale small images */}}
         srcset="{{with $large.RelPermalink }}{{.}}{{ end }}">
     
     {{ if gt $src.Width 1500 }}
-    <img alt="{{ $alt }}" title="{{ $alt }}" src="{{ $large.RelPermalink }}">
+    <img alt="{{ $alt }}" title="{{ $alt }}" src="{{with $large.RelPermalink }}{{.}}{{ end }}">
     {{ else }}
     <img alt="{{ $alt }}" title="{{ $alt }}" src="{{ $src }}">
     {{ end }}
