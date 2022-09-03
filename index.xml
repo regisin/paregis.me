@@ -160,8 +160,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="/about/images/SF_hue9675bf2a167e4d68149236b8388dbe8_1408433_1500x0_resize_q75_box.jpg">
-&lt;img
-alt="San Francisco" title="San Francisco" src="images/SF.jpg">
+&lt;img alt="San Francisco" title="San Francisco" src="/about/images/SF_hue9675bf2a167e4d68149236b8388dbe8_1408433_1500x0_resize_q75_box.jpg">
 &lt;/picture>
 &lt;/p>
 &lt;/p></content></item><item><title>Building and Hosting a Static Website for Free on Github</title><link>/posts/building-and-hosting-a-static-website-for-free-on-github/</link><pubDate>Thu, 09 Dec 2021 00:00:01 -0500</pubDate><guid>/posts/building-and-hosting-a-static-website-for-free-on-github/</guid><description>Table of Content Building and hosting a static website for free on GitHub Recap Set up the GitHub.com account Create the account Create the website repository Uploading the new repository Cleaning up the repo with .gitignore A little more about branches and GitHub Pages Deploying by hand Deploy automatically with GitHub Actions Summary Recap We&amp;rsquo;ve been working on creating a static website using python with Jinja2. At this point we have a simple website with a couple of pages.</description><content>&lt;h2 id="table-of-content">Table of Content&lt;/h2>
@@ -211,8 +210,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="">
-&lt;img
-alt="New repository" title="New repository" src="images/Screen_Shot_2021_12_09_at_11_11_14_401b895d8d.png">
+&lt;img alt="New repository" title="New repository" src="images/Screen_Shot_2021_12_09_at_11_11_14_401b895d8d.png">
 &lt;/picture>
 &lt;/p>
 &lt;/p>
@@ -228,8 +226,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="">
-&lt;img
-alt="Naming new repository" title="Naming new repository" src="images/Screen_Shot_2021_12_09_at_11_11_41_4cfad89bbc.png">
+&lt;img alt="Naming new repository" title="Naming new repository" src="images/Screen_Shot_2021_12_09_at_11_11_41_4cfad89bbc.png">
 &lt;/picture>
 &lt;/p>
 &lt;/p>
@@ -246,8 +243,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="/posts/building-and-hosting-a-static-website-for-free-on-github/images/Screen_Shot_2021_12_09_at_11_13_02_0e2447f0be_huef304e05f4fb2de2b34da8a24a27e40f_75984_500x0_resize_box_3.png">
-&lt;img
-alt="Repository created" title="Repository created" src="images/Screen_Shot_2021_12_09_at_11_13_02_0e2447f0be.png">
+&lt;img alt="Repository created" title="Repository created" src="images/Screen_Shot_2021_12_09_at_11_13_02_0e2447f0be.png">
 &lt;/picture>
 &lt;/p>
 &lt;/p>
@@ -272,8 +268,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="/posts/building-and-hosting-a-static-website-for-free-on-github/images/Screen_Shot_2021_12_09_at_11_53_12_c6569e6323_hu499829b7b57f1a284a79b72124e51624_38650_500x0_resize_box_3.png">
-&lt;img
-alt="First commit" title="First commit" src="images/Screen_Shot_2021_12_09_at_11_53_12_c6569e6323.png">
+&lt;img alt="First commit" title="First commit" src="images/Screen_Shot_2021_12_09_at_11_53_12_c6569e6323.png">
 &lt;/picture>
 &lt;/p>
 &lt;/p>
@@ -307,8 +302,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="">
-&lt;img
-alt="Add .gitignore file" title="Add .gitignore file" src="images/Screen_Shot_2021_12_09_at_13_48_02_85494b771c.png">
+&lt;img alt="Add .gitignore file" title="Add .gitignore file" src="images/Screen_Shot_2021_12_09_at_13_48_02_85494b771c.png">
 &lt;/picture>
 &lt;/p>
 &lt;/p>
@@ -330,8 +324,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="">
-&lt;img
-alt="New gh-pages branch" title="New gh-pages branch" src="images/Screen_Shot_2021_12_09_at_13_37_19_1f3be06272.png">
+&lt;img alt="New gh-pages branch" title="New gh-pages branch" src="images/Screen_Shot_2021_12_09_at_13_37_19_1f3be06272.png">
 &lt;/picture>
 &lt;/p>
 &lt;/p>
@@ -347,8 +340,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="">
-&lt;img
-alt="Repository settings" title="Repository settings" src="images/Screen_Shot_2021_12_09_at_14_02_20_69cbcfacb6.png">
+&lt;img alt="Repository settings" title="Repository settings" src="images/Screen_Shot_2021_12_09_at_14_02_20_69cbcfacb6.png">
 &lt;/picture>
 &lt;/p>
 &lt;p>
@@ -361,8 +353,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="/posts/building-and-hosting-a-static-website-for-free-on-github/images/Screen_Shot_2021_12_09_at_14_02_42_ff85a36167_hub15d3b947c5927301399fd479b429575_81503_500x0_resize_box_3.png">
-&lt;img
-alt="Pages settings" title="Pages settings" src="images/Screen_Shot_2021_12_09_at_14_02_42_ff85a36167.png">
+&lt;img alt="Pages settings" title="Pages settings" src="images/Screen_Shot_2021_12_09_at_14_02_42_ff85a36167.png">
 &lt;/picture>
 &lt;/p>
 &lt;p>
@@ -375,8 +366,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="">
-&lt;img
-alt="Select gh-pages in the pages settings" title="Select gh-pages in the pages settings" src="images/Screen_Shot_2021_12_09_at_14_02_51_862727c4e0.png">
+&lt;img alt="Select gh-pages in the pages settings" title="Select gh-pages in the pages settings" src="images/Screen_Shot_2021_12_09_at_14_02_51_862727c4e0.png">
 &lt;/picture>
 &lt;/p>
 &lt;/p>
@@ -458,8 +448,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="/posts/building-and-hosting-a-static-website-for-free-on-github/images/Screen_Shot_2021_12_09_at_15_17_46_5592becbd2_hu4d88469705f2186a6b82bbc80e158069_412151_1500x0_resize_box_3.png">
-&lt;img
-alt="GitHub Actions" title="GitHub Actions" src="images/Screen_Shot_2021_12_09_at_15_17_46_5592becbd2.png">
+&lt;img alt="GitHub Actions" title="GitHub Actions" src="/posts/building-and-hosting-a-static-website-for-free-on-github/images/Screen_Shot_2021_12_09_at_15_17_46_5592becbd2_hu4d88469705f2186a6b82bbc80e158069_412151_1500x0_resize_box_3.png">
 &lt;/picture>
 &lt;/p>
 &lt;/p>
@@ -476,8 +465,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="/posts/building-and-hosting-a-static-website-for-free-on-github/images/Screen_Shot_2021_12_09_at_15_20_24_7a9dd37c36_hub894bde878ced8f219d9d9957056f95b_18330_500x0_resize_box_3.png">
-&lt;img
-alt="Hosted website with wrong configuration" title="Hosted website with wrong configuration" src="images/Screen_Shot_2021_12_09_at_15_20_24_7a9dd37c36.png">
+&lt;img alt="Hosted website with wrong configuration" title="Hosted website with wrong configuration" src="images/Screen_Shot_2021_12_09_at_15_20_24_7a9dd37c36.png">
 &lt;/picture>
 &lt;/p>
 &lt;/p>
@@ -496,8 +484,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="">
-&lt;img
-alt="Hosted website with correct configuration" title="Hosted website with correct configuration" src="images/Screen_Shot_2021_12_09_at_15_22_01_bccb068de1.png">
+&lt;img alt="Hosted website with correct configuration" title="Hosted website with correct configuration" src="images/Screen_Shot_2021_12_09_at_15_22_01_bccb068de1.png">
 &lt;/picture>
 &lt;/p>
 &lt;/p>
@@ -675,8 +662,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="/posts/the-forgotten-page/images/Screen_Shot_2021_11_23_at_15_54_55_bd13ff7fb9_hu6132ac2e5ba9529c4c1638d231462fd9_78605_800x0_resize_box_3.png">
-&lt;img
-alt="404 Not Found" title="404 Not Found" src="images/Screen_Shot_2021_11_23_at_15_54_55_bd13ff7fb9.png">
+&lt;img alt="404 Not Found" title="404 Not Found" src="images/Screen_Shot_2021_11_23_at_15_54_55_bd13ff7fb9.png">
 &lt;/picture>
 &lt;/p>
 &lt;/p>
@@ -1328,8 +1314,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="/posts/separating-data-from-the-rest/images/Screen_Shot_2021_11_11_at_11_19_23_bb658d57f2_hu2301602a29be7ec7ca5ea683d9dcedeb_107638_500x0_resize_box_3.png">
-&lt;img
-alt="Serving the website" title="Serving the website" src="images/Screen_Shot_2021_11_11_at_11_19_23_bb658d57f2.png">
+&lt;img alt="Serving the website" title="Serving the website" src="images/Screen_Shot_2021_11_11_at_11_19_23_bb658d57f2.png">
 &lt;/picture>
 &lt;/p>
 &lt;/p>
@@ -1419,8 +1404,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="/posts/creating-templates/images/Screen_Shot_2021_11_09_at_13_52_45_d3964349a4_hudab7d86a5472e249896f085d55b737a9_63108_800x0_resize_box_3.png">
-&lt;img
-alt="The index page at localhost:8000" title="The index page at localhost:8000" src="images/Screen_Shot_2021_11_09_at_13_52_45_d3964349a4.png">
+&lt;img alt="The index page at localhost:8000" title="The index page at localhost:8000" src="images/Screen_Shot_2021_11_09_at_13_52_45_d3964349a4.png">
 &lt;/picture>
 &lt;/p>
 &lt;p>
@@ -1433,8 +1417,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="/posts/creating-templates/images/Screen_Shot_2021_11_09_at_13_52_51_552c69e5a2_hu5e7efedfe416e431117ee87eb09ac78c_61112_800x0_resize_box_3.png">
-&lt;img
-alt="About page at localhost:8000/about.html" title="About page at localhost:8000/about.html" src="images/Screen_Shot_2021_11_09_at_13_52_51_552c69e5a2.png">
+&lt;img alt="About page at localhost:8000/about.html" title="About page at localhost:8000/about.html" src="images/Screen_Shot_2021_11_09_at_13_52_51_552c69e5a2.png">
 &lt;/picture>
 &lt;/p>
 &lt;p>
@@ -1447,8 +1430,7 @@ srcset="">
 srcset="">
 &lt;source media="(min-width: 1600px)"
 srcset="/posts/creating-templates/images/Screen_Shot_2021_11_09_at_13_52_56_a187b02fff_hu5a4d7683d7fb5a03ca32ce4fe369b75c_79060_800x0_resize_box_3.png">
-&lt;img
-alt="Teaching page at localhost:8000/teaching.html" title="Teaching page at localhost:8000/teaching.html" src="images/Screen_Shot_2021_11_09_at_13_52_56_a187b02fff.png">
+&lt;img alt="Teaching page at localhost:8000/teaching.html" title="Teaching page at localhost:8000/teaching.html" src="images/Screen_Shot_2021_11_09_at_13_52_56_a187b02fff.png">
 &lt;/picture>
 &lt;/p>
 &lt;/p>
