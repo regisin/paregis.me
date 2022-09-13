@@ -36,6 +36,10 @@ title = "paregis.me"
 
   # set a custom favicon (default is a `themeColor` square)
   favicon = "favicon.ico"
+  appleTouch = "apple-touch-icon.png"
+  favicon32x32 = "favicon-32x32.png"
+  favicon16x16 = "favicon-16x16.png"
+  manifest = "site.webmanifest"
 
   # Provide a string as a prefix for the last update date. By default, it looks like this: 2020-xx-xx [Updated: 2020-xx-xx] :: Author
   # updatedDatePrefix = "Updated"
