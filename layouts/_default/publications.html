@@ -2,6 +2,9 @@
 <div class="index-content">{{ . }}</div>
 {{ end }}
 
+<h1 class="post-title">
+  <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a></h1>
+
 <h2>Journal articles</h2>
 
 <ul>

@@ -8,4 +8,3 @@ menu:
     weight: 4
 ---
 
-# Publications
