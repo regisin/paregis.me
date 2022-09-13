@@ -1,37 +1,31 @@
-{{ define "main" }} {{ with .Content }}
-<div class="index-content">{{ . }}</div>
-{{ end }}
+{{ define "main" }}
+<div class="post">
+  <h1 class="post-title">
+    <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a></h1>
 
-<h1 class="post-title">
-  <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a></h1>
+  <h2>Journal articles</h2>
 
-<h2>Journal articles</h2>
+  <ul>
+    {{ range where .Pages ".Params.categories" "intersect" (slice "Journal") }}
+    <li>
+      <a href="{{ .Permalink }}" style="text-decoration: none"
+        >{{ .Params.Citation | markdownify }}</a
+      >
+    </li>
+    {{ end }}
+  </ul>
 
-<ul>
-  {{ range where .Pages ".Params.categories" "intersect" (slice "Journal") }}
-  <li>
-    <a href="{{ .Permalink }}" style="text-decoration: none"
-      >{{ .Params.Citation | markdownify }}</a
-    >
-  </li>
-  {{ end }}
-</ul>
+  <h2>Conference papers</h2>
 
-<h2>Conference papers</h2>
+  <ul>
+    {{ range where .Pages ".Params.categories" "intersect" (slice "Conference") }}
+    <li>
+      <a href="{{ .Permalink }}" style="text-decoration: none"
+        >{{ .Params.Citation | markdownify }}</a
+      >
+    </li>
+    {{ end }}
+  </ul>
 
-<ul>
-  {{ range where .Pages ".Params.categories" "intersect" (slice "Conference") }}
-  <li>
-    <a href="{{ .Permalink }}" style="text-decoration: none"
-      >{{ .Params.Citation | markdownify }}</a
-    >
-  </li>
-  {{ end }}
-</ul>
-
-{{ range .Pages }}
-{{ .Title }}
-{{ end }}
-
-
+</div>
 {{ end }}
