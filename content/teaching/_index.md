@@ -3,7 +3,7 @@ title: "Teaching"
 date: 2022-06-08T14:30:04-05:00
 draft: false
 layout: "teaching"
-description: "List of courses taught."
+description: "List of higher education courses I have taught over the years categorized by institution and semester they were taught."
 menu:
   main:
     weight: 3
