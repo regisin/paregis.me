@@ -1,6 +1,7 @@
 ---
 title: "About"
 draft: false
+description: "Do I really need a description for this about page that has no meaninful content?"
 menu:
   main:
     weight: 2
