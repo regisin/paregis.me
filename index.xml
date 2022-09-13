@@ -145,26 +145,7 @@ Introduction I&amp;rsquo;m a big fa of some frameworks out there. I like Svelte 
 &lt;h2 id="conclusion">Conclusion&lt;/h2>
 &lt;p>This is a very rudimentary hot module reload, and should only be used in dev, not in production. There&amp;rsquo;s no complex state management on the frontend, in which case you should move to a mature frontend framework like React.&lt;/p>
 &lt;p>One major limitation is the navigation between links. The javascript will reload the page and not let you navigate away from it, you need to type the url of the page you are developing in the browser directly.&lt;/p>
-&lt;p>All in all, this thing really helps me test out changes in html using only python.&lt;/p></content></item><item><title>About</title><link>/about/</link><pubDate>Wed, 08 Jun 2022 14:30:04 -0500</pubDate><guid>/about/</guid><description>About I&amp;rsquo;m Paulo, I am an Assistant Professor at Southeastern Louisiana University. I teach mostly programming and networking courses in the Computer Science department, you can check the full list on the teaching page. I also do some research on drones and IoT networks, all publications are in the, well, publications page.
-This is my personal website, so the things I post might not be strictly about work. Just the interesting stuff I come across IRL and the interwebs!</description><content>&lt;h1 id="about">About&lt;/h1>
-&lt;p>I&amp;rsquo;m Paulo, I am an Assistant Professor at Southeastern Louisiana University. I teach mostly programming and networking courses in the Computer Science department, you can check the full list on the teaching page. I also do some research on drones and IoT networks, all publications are in the, well, publications page.&lt;/p>
-&lt;p>This is my personal website, so the things I post might not be strictly about work. Just the interesting stuff I come across IRL and the interwebs!&lt;/p>
-&lt;p>For now, here&amp;rsquo;s a photo I really like that I took in the bay area:&lt;/p>
-&lt;p>
-&lt;p>
-&lt;picture>
-&lt;source media="(max-width: 376px)"
-srcset="/about/images/SF_hue9675bf2a167e4d68149236b8388dbe8_1408433_500x0_resize_q75_box.jpg">
-&lt;source media="(max-width: 992px)"
-srcset="/about/images/SF_hue9675bf2a167e4d68149236b8388dbe8_1408433_800x0_resize_q75_box.jpg">
-&lt;source media="(max-width: 1400px)"
-srcset="/about/images/SF_hue9675bf2a167e4d68149236b8388dbe8_1408433_1200x0_resize_q75_box.jpg">
-&lt;source media="(min-width: 1600px)"
-srcset="/about/images/SF_hue9675bf2a167e4d68149236b8388dbe8_1408433_1500x0_resize_q75_box.jpg">
-&lt;img alt="San Francisco" title="San Francisco" src="/about/images/SF_hue9675bf2a167e4d68149236b8388dbe8_1408433_1500x0_resize_q75_box.jpg">
-&lt;/picture>
-&lt;/p>
-&lt;/p></content></item><item><title>Building and Hosting a Static Website for Free on Github</title><link>/posts/building-and-hosting-a-static-website-for-free-on-github/</link><pubDate>Thu, 09 Dec 2021 00:00:01 -0500</pubDate><guid>/posts/building-and-hosting-a-static-website-for-free-on-github/</guid><description>Table of Content Building and hosting a static website for free on GitHub Recap Set up the GitHub.com account Create the account Create the website repository Uploading the new repository Cleaning up the repo with .gitignore A little more about branches and GitHub Pages Deploying by hand Deploy automatically with GitHub Actions Summary Recap We&amp;rsquo;ve been working on creating a static website using python with Jinja2. At this point we have a simple website with a couple of pages.</description><content>&lt;h2 id="table-of-content">Table of Content&lt;/h2>
+&lt;p>All in all, this thing really helps me test out changes in html using only python.&lt;/p></content></item><item><title>Building and Hosting a Static Website for Free on Github</title><link>/posts/building-and-hosting-a-static-website-for-free-on-github/</link><pubDate>Thu, 09 Dec 2021 00:00:01 -0500</pubDate><guid>/posts/building-and-hosting-a-static-website-for-free-on-github/</guid><description>Table of Content Building and hosting a static website for free on GitHub Recap Set up the GitHub.com account Create the account Create the website repository Uploading the new repository Cleaning up the repo with .gitignore A little more about branches and GitHub Pages Deploying by hand Deploy automatically with GitHub Actions Summary Recap We&amp;rsquo;ve been working on creating a static website using python with Jinja2. At this point we have a simple website with a couple of pages.</description><content>&lt;h2 id="table-of-content">Table of Content&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="#building-and-hosting-a-static-website-for-free-on-github">Building and hosting a static website for free on GitHub&lt;/a>&lt;/li>
 &lt;li>&lt;a href="#recap">Recap&lt;/a>&lt;/li>
@@ -1790,7 +1771,7 @@ You can find me on Twitter @paregis.</description><content>&lt;h2 id="welcome">W
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> doi={10.1016/j.comnet.2018.03.011},
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> journal={Elsevier Computer Networks},
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></content></item><item><title>Distributed Split Path Routing Strategy for Multi Hop Mesh Networks</title><link>/publications/distributed-split-path-routing-strategy-for-multi-hop-mesh-networks/</link><pubDate>Sun, 01 Oct 2017 00:00:00 -0500</pubDate><guid>/publications/distributed-split-path-routing-strategy-for-multi-hop-mesh-networks/</guid><description>Abstract The concept of mesh networks brings many challenges to the research community when designing such system. In this paper, we propose a new routing model to account for the link utilization between nodes, as well as the remaining energy left in each node. The framework, called Distributed Split-path, is implemented on top of the Optimized Link-State Routing (OLSR) protocol. We demonstrate the improvement our proposed scheme offers to the longevity of the network while maintaining similar performance as the original OLSR protocol.</description><content>&lt;h1 id="abstract">Abstract&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></content></item><item><title>Distributed Split Path Routing Strategy for Multi Hop Mesh Networks</title><link>/publications/distributed-split-path-routing-strategy-for-multi-hop-mesh-networks/</link><pubDate>Sun, 01 Oct 2017 00:00:00 -0500</pubDate><guid>/publications/distributed-split-path-routing-strategy-for-multi-hop-mesh-networks/</guid><description>Abstract The concept of mesh networks brings many challenges to the research community when designing such system. In this paper, we propose a new routing model to account for the link utilization between nodes, as well as the remaining energy left in each node. The framework, called Distributed Split-path, is implemented on top of the Optimized Link-State Routing (OLSR) protocol. We demonstrate the improvement our proposed scheme offers to the longevity of the network while maintaining similar performance as the original OLSR protocol.</description><content>&lt;h2 id="abstract">Abstract&lt;/h2>
 &lt;p>The concept of mesh networks brings many challenges to the research community when designing such system. In this paper, we propose a new routing model to account for the link utilization between nodes, as well as the remaining energy left in each node. The framework, called Distributed Split-path, is implemented on top of the Optimized Link-State Routing (OLSR) protocol. We demonstrate the improvement our proposed scheme offers to the longevity of the network while maintaining similar performance as the original OLSR protocol. We devise a performance indicator to show in which cases our approach benefits the network system designer, depending on the priorities of the network application. Simulation results show that by allowing a trade-off in the performance, the new model outperforms current protocol.&lt;/p>
 &lt;h2 id="resources">Resources&lt;/h2>
 &lt;ul>
@@ -1870,7 +1851,7 @@ You can find me on Twitter @paregis.</description><content>&lt;h2 id="welcome">W
 &lt;div class="500">
 &lt;iframe src="https://www.youtube.com/embed/MFCymLmYj6U" allowfullscreen title="Random walk (distance mode) mobility model in 3D with obstacle using ns-3">&lt;/iframe>
 &lt;/div>
-&lt;h1 id="bibtex">Bibtex&lt;/h1>
+&lt;h2 id="bibtex">Bibtex&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-latex" data-lang="latex">&lt;span style="display:flex;">&lt;span>@inproceedings{regis2016implementation,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> title={Implementation of 3D Obstacle Compliant Mobility Models for UAV networks in ns-3},
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> author={Paulo Alexandre Regis, Suman Bhunia, and Shamik Sengupta},
@@ -1895,4 +1876,22 @@ You can find me on Twitter @paregis.</description><content>&lt;h2 id="welcome">W
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> address={New York, NY, USA},
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> booktitle={2015 IEEE 17th International Conference on High Performance Computing and Communications, 2015 IEEE 7th International Symposium on Cyberspace Safety and Security, and 2015 IEEE 12th International Conference on Embedded Software and Systems},
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></content></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></content></item><item><title>About</title><link>/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/about/</guid><description>I&amp;rsquo;m Paulo, I am an Assistant Professor at Southeastern Louisiana University. I teach mostly programming and networking courses in the Computer Science department, you can check the full list on the teaching page. I also do some research on drones and IoT networks, all publications are in the, well, publications page.
+This is my personal website, so the things I post might not be strictly about work. Just the interesting stuff I come across IRL and the interwebs!</description><content>&lt;p>I&amp;rsquo;m Paulo, I am an Assistant Professor at Southeastern Louisiana University. I teach mostly programming and networking courses in the Computer Science department, you can check the full list on the teaching page. I also do some research on drones and IoT networks, all publications are in the, well, publications page.&lt;/p>
+&lt;p>This is my personal website, so the things I post might not be strictly about work. Just the interesting stuff I come across IRL and the interwebs!&lt;/p>
+&lt;p>For now, here&amp;rsquo;s a photo I really like that I took in the bay area:&lt;/p>
+&lt;p>
+&lt;p>
+&lt;picture>
+&lt;source media="(max-width: 376px)"
+srcset="/about/images/SF_hue9675bf2a167e4d68149236b8388dbe8_1408433_500x0_resize_q75_box.jpg">
+&lt;source media="(max-width: 992px)"
+srcset="/about/images/SF_hue9675bf2a167e4d68149236b8388dbe8_1408433_800x0_resize_q75_box.jpg">
+&lt;source media="(max-width: 1400px)"
+srcset="/about/images/SF_hue9675bf2a167e4d68149236b8388dbe8_1408433_1200x0_resize_q75_box.jpg">
+&lt;source media="(min-width: 1600px)"
+srcset="/about/images/SF_hue9675bf2a167e4d68149236b8388dbe8_1408433_1500x0_resize_q75_box.jpg">
+&lt;img alt="San Francisco" title="San Francisco" src="/about/images/SF_hue9675bf2a167e4d68149236b8388dbe8_1408433_1500x0_resize_q75_box.jpg">
+&lt;/picture>
+&lt;/p>
+&lt;/p></content></item></channel></rss>
