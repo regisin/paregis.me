@@ -15,7 +15,7 @@ Introduction I&amp;rsquo;m a big fa of some frameworks out there. I like Svelte 
 &lt;/code>&lt;/pre>
 &lt;p>Enough talking!&lt;/p>
 &lt;h2 id="morphcoding-time">Morph(Cod)ing time&lt;/h2>
-&lt;p>I can&amp;rsquo;t do a better job at teaching you about FastAPI than &lt;a href="fastapi.tiangolo.com/">its official documentation&lt;/a>. I&amp;rsquo;m using &lt;code>3.10&lt;/code>, but it could work with &lt;code>3.6&lt;/code> depending which FastAPI version you use. I&amp;rsquo;m also doing this on a macOS, so adapt the commands accordingly.&lt;/p>
+&lt;p>I can&amp;rsquo;t do a better job at teaching you about FastAPI than &lt;a href="https://fastapi.tiangolo.com/">its official documentation&lt;/a>. I&amp;rsquo;m using &lt;code>3.10&lt;/code>, but it could work with &lt;code>3.6&lt;/code> depending which FastAPI version you use. I&amp;rsquo;m also doing this on a macOS, so adapt the commands accordingly.&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>New project, I like to use &lt;a href="https://docs.python.org/3/tutorial/venv.html">Virtual Environments&lt;/a> for each new python project.&lt;/p>
@@ -144,6 +144,7 @@ Introduction I&amp;rsquo;m a big fa of some frameworks out there. I like Svelte 
 &lt;/ul>
 &lt;h2 id="conclusion">Conclusion&lt;/h2>
 &lt;p>This is a very rudimentary hot module reload, and should only be used in dev, not in production. There&amp;rsquo;s no complex state management on the frontend, in which case you should move to a mature frontend framework like React.&lt;/p>
+&lt;p>One major limitation is the navigation between links. The javascript will reload the page and not let you navigate away from it, you need to type the url of the page you are developing in the browser directly.&lt;/p>
 &lt;p>All in all, this thing really helps me test out changes in html using only python.&lt;/p></content></item><item><title>Building and Hosting a Static Website for Free on Github</title><link>/posts/building-and-hosting-a-static-website-for-free-on-github/</link><pubDate>Thu, 09 Dec 2021 00:00:01 -0500</pubDate><guid>/posts/building-and-hosting-a-static-website-for-free-on-github/</guid><description>Table of Content Building and hosting a static website for free on GitHub Recap Set up the GitHub.com account Create the account Create the website repository Uploading the new repository Cleaning up the repo with .gitignore A little more about branches and GitHub Pages Deploying by hand Deploy automatically with GitHub Actions Summary Recap We&amp;rsquo;ve been working on creating a static website using python with Jinja2. At this point we have a simple website with a couple of pages.</description><content>&lt;h2 id="table-of-content">Table of Content&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="#building-and-hosting-a-static-website-for-free-on-github">Building and hosting a static website for free on GitHub&lt;/a>&lt;/li>

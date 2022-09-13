@@ -15,7 +15,7 @@ Introduction I&amp;rsquo;m a big fa of some frameworks out there. I like Svelte 
 &lt;/code>&lt;/pre>
 &lt;p>Enough talking!&lt;/p>
 &lt;h2 id="morphcoding-time">Morph(Cod)ing time&lt;/h2>
-&lt;p>I can&amp;rsquo;t do a better job at teaching you about FastAPI than &lt;a href="fastapi.tiangolo.com/">its official documentation&lt;/a>. I&amp;rsquo;m using &lt;code>3.10&lt;/code>, but it could work with &lt;code>3.6&lt;/code> depending which FastAPI version you use. I&amp;rsquo;m also doing this on a macOS, so adapt the commands accordingly.&lt;/p>
+&lt;p>I can&amp;rsquo;t do a better job at teaching you about FastAPI than &lt;a href="https://fastapi.tiangolo.com/">its official documentation&lt;/a>. I&amp;rsquo;m using &lt;code>3.10&lt;/code>, but it could work with &lt;code>3.6&lt;/code> depending which FastAPI version you use. I&amp;rsquo;m also doing this on a macOS, so adapt the commands accordingly.&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>New project, I like to use &lt;a href="https://docs.python.org/3/tutorial/venv.html">Virtual Environments&lt;/a> for each new python project.&lt;/p>
@@ -144,6 +144,7 @@ Introduction I&amp;rsquo;m a big fa of some frameworks out there. I like Svelte 
 &lt;/ul>
 &lt;h2 id="conclusion">Conclusion&lt;/h2>
 &lt;p>This is a very rudimentary hot module reload, and should only be used in dev, not in production. There&amp;rsquo;s no complex state management on the frontend, in which case you should move to a mature frontend framework like React.&lt;/p>
+&lt;p>One major limitation is the navigation between links. The javascript will reload the page and not let you navigate away from it, you need to type the url of the page you are developing in the browser directly.&lt;/p>
 &lt;p>All in all, this thing really helps me test out changes in html using only python.&lt;/p></content></item><item><title>About</title><link>/about/</link><pubDate>Wed, 08 Jun 2022 14:30:04 -0500</pubDate><guid>/about/</guid><description>About I&amp;rsquo;m Paulo, I am an Assistant Professor at Southeastern Louisiana University. I teach mostly programming and networking courses in the Computer Science department, you can check the full list on the teaching page. I also do some research on drones and IoT networks, all publications are in the, well, publications page.
 This is my personal website, so the things I post might not be strictly about work. Just the interesting stuff I come across IRL and the interwebs!</description><content>&lt;h1 id="about">About&lt;/h1>
 &lt;p>I&amp;rsquo;m Paulo, I am an Assistant Professor at Southeastern Louisiana University. I teach mostly programming and networking courses in the Computer Science department, you can check the full list on the teaching page. I also do some research on drones and IoT networks, all publications are in the, well, publications page.&lt;/p>
