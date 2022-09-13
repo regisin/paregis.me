@@ -37,7 +37,7 @@ Enough talking!
 
 ## Morph(Cod)ing time
 
-I can't do a better job at teaching you about FastAPI than [its official documentation](fastapi.tiangolo.com/). I'm using `3.10`, but it could work with `3.6` depending which FastAPI version you use. I'm also doing this on a macOS, so adapt the commands accordingly.
+I can't do a better job at teaching you about FastAPI than [its official documentation](https://fastapi.tiangolo.com/). I'm using `3.10`, but it could work with `3.6` depending which FastAPI version you use. I'm also doing this on a macOS, so adapt the commands accordingly.
 
 1. New project, I like to use [Virtual Environments](https://docs.python.org/3/tutorial/venv.html) for each new python project.
 
@@ -198,5 +198,7 @@ That's it! Now with the development server running, head on to your browser `htt
 ## Conclusion
 
 This is a very rudimentary hot module reload, and should only be used in dev, not in production. There's no complex state management on the frontend, in which case you should move to a mature frontend framework like React.
+
+One major limitation is the navigation between links. The javascript will reload the page and not let you navigate away from it, you need to type the url of the page you are developing in the browser directly.
 
 All in all, this thing really helps me test out changes in html using only python.
