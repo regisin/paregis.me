@@ -2,13 +2,12 @@
 title: "Teaching"
 date: 2022-06-08T14:30:04-05:00
 draft: false
+layout: "teaching"
 description: "List of courses taught."
 menu:
   main:
     weight: 3
 ---
-
-# Teaching
 
 ## Southeastern Louisiana University
 
