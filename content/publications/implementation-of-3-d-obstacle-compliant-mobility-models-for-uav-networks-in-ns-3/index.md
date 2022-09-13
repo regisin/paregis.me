@@ -22,7 +22,7 @@ UAV networks are envisioned to play a crucial role in the future generations of 
 
 {{< youtube id=MFCymLmYj6U class=500 title="Random walk (distance mode) mobility model in 3D with obstacle using ns-3" >}}
 
-# Bibtex
+## Bibtex
 ```latex
 @inproceedings{regis2016implementation,
     title={Implementation of 3D Obstacle Compliant Mobility Models for UAV networks in ns-3},
