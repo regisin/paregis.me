@@ -69,7 +69,7 @@ title = "paregis.me - just another personal projects website"
 [languages]
   [languages.en]
     languageName = "English"
-    subtitle = "Paulo's personal echo chamber."
+    subtitle = "Paulo's personal website. I post my academic work, professional life, and blog about stuff I'm curious about and things that pick my interest."
     owner = "Paulo Alexandre Regis"
     keywords = "networking, wireless, engineering, cybersecurity, web development, python, javascript"
     copyright = "All rights preserved."

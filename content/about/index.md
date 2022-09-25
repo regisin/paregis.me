@@ -1,7 +1,7 @@
 ---
 title: "About"
 draft: false
-description: "Do I really need a description for this about page that has no meaninful content?"
+description: "Paulo's personal website. I post my academic work, professional life, and blog about stuff I'm curious about and things that pick my interest."
 menu:
   main:
     weight: 2

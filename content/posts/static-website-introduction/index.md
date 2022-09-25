@@ -2,7 +2,7 @@
 title: "Static Website Introduction"
 date: 2021-10-12T00:00:01-05:00
 draft: false
-description: "Introducing a new tutorial series about designing a static website and hosting it on GitHub."
+description: "Introducing a new tutorial series about implementing a static website from scratch with Python, and hosting it on GitHub."
 categories:
 - Tutorial
 ---

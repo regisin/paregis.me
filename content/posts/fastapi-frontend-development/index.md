@@ -2,7 +2,7 @@
 title: "FastAPI for frontend development with hot reload"
 date: 2022-07-25T00:00:01-05:00
 draft: false
-description: "How to have hot reload when using Jinja templates with FastAPI."
+description: "A quick and easy JavaJcript hack to enable hot reload in frontend dvelopment when using Jinja templates with FastAPI."
 categories:
 - Tutorial
 ---
