@@ -1625,9 +1625,4 @@ First steps First of all, we will be using python to create our website.</descri
 &lt;li>Create a data store (not data base!)&lt;/li>
 &lt;li>Combining templates and data from the store to create pseudo dynamic pages&lt;/li>
 &lt;li>Publish the website to GitHub using Actions&lt;/li>
-&lt;/ul></content></item><item><title>Aloha!</title><link>/posts/aloha/</link><pubDate>Tue, 20 Apr 2021 00:00:01 -0500</pubDate><guid>/posts/aloha/</guid><description>Welcome! Hi, my name is Paulo.
-This is my personal website, and I post about things that interest me.
-You can find me on Twitter @paregis.</description><content>&lt;h2 id="welcome">Welcome!&lt;/h2>
-&lt;p>Hi, my name is Paulo.&lt;/p>
-&lt;p>This is my personal website, and I post about things that interest me.&lt;/p>
-&lt;p>You can find me on Twitter &lt;a href="https://twitter.com/paregis">@paregis&lt;/a>.&lt;/p></content></item></channel></rss>
+&lt;/ul></content></item></channel></rss>
