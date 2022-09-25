@@ -2,7 +2,7 @@
 title: "Separating Data From the Rest"
 date: 2021-11-11T00:00:01-05:00
 draft: false
-description: "Make the development process a little bit more productive by separating the data from the other parts of the website. Previously, the content of the webpages were either hard-coded into the templates themselves, or into the build script when passing values to the template. In this post, we give the data its own home."
+description: "Make the development process more productive by separating data from the rest. In this post, we give the data its own home."
 categories:
 - Tutorial
 ---

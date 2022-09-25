@@ -2,7 +2,7 @@
 title: "Pretty Urls"
 date: 2021-11-12T00:00:01-05:00
 draft: false
-description: "In this post, we will change the build script to make the URL that we type in the browser more convenient and intuitive for us humans to read, in other words \"prettier\"."
+description: "We change the build script to make the URL that we type in the browser more convenient and intuitive for us humans to read, in other words \"prettier\"."
 categories:
 - Tutorial
 ---

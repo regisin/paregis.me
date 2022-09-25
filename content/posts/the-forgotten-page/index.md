@@ -2,7 +2,7 @@
 title: "The Forgotten Page"
 date: 2021-11-23T00:00:01-05:00
 draft: false
-description: "In this post we, learn how to use template blocks to add the header and footer sections with a navigation menu to all pages of the website and re purpose the about page to be the front page."
+description: "In this post, we use template blocks to add header and footer sections, and navigation menu to all pages of the website."
 categories:
 - Tutorial
 ---

@@ -2,7 +2,7 @@
 title: "The Details Page"
 date: 2021-11-17T00:00:01-05:00
 draft: false
-description: "We created a static website with the About, Teaching, and Research pages. The `/research` page lists all projects in a compact manner. In this post, we will create a dedicated page for each research project listed in the data store."
+description: "In this post, we create a dedicated page for each research project listed in the data store. Also known as the project details page of a portfolio."
 categories:
 - Tutorial
 ---
