@@ -2,7 +2,7 @@
 title: "Attack of the Static Assets"
 date: 2021-11-13T00:00:01-05:00
 draft: false
-description: "A new force rises to the ranks of the website republic and threatens the peaceful galaxy of pages. In this chapter we tackle static assets and create a new sub page."
+description: "A new force rises to the ranks of the website republic and threatens the peaceful galaxy of pages. Here, we tackle static assets and create a new sub page."
 categories:
 - Tutorial
 ---

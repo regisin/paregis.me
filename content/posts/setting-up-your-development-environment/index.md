@@ -2,7 +2,7 @@
 title: "Setting Up Your Development Environment"
 date: 2021-11-02T00:00:01-05:00
 draft: false
-description: "First post of the static website series where we go over the process of building a static portfolio website. Here, we will set up our project on our local computer."
+description: "First of a series of posts where we go over the process of building a static portfolio website. Here, we will set up our project on our local computer."
 categories:
 - Tutorial
 ---
