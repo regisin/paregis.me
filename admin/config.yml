@@ -1,3 +1,34 @@
 backend:
-  name: git-gateway
-  branch: main # Branch to update (optional; defaults to master)
+  name: github
+  repo: regisin/paregis.me
+  branch: main
+
+publish_mode: editorial_workflow
+
+media_folder: "static/images/uploads"
+public_folder: "images"
+
+site_url: https://paregis.me
+display_url: https://paregis.me
+
+collections:
+  - label: "Posts"
+    name: "posts"
+    folder: "content/posts"
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Description", name: "description", widget: "string"}
+      - {label: "Category", name: "categories", widget: "select", options: ["Miscellaneous", "Tutorial"]}
+      - {label: "Body", name: "body", widget: "markdown"}
+  - label: "Publications"
+    name: "publications"
+    folder: "content/publications"
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Published on", name: "date", widget: "datetime"}
+      - {label: "Citation (use inline markdown)", name: "citation", widget: "string"}
+      - {label: "Category", name: "categories", widget: "select", options: ["Journal", "Conference"]}
+      - {label: "Body", name: "body", widget: "markdown"}
