@@ -9,7 +9,7 @@ publish_mode: editorial_workflow
 media_folder: "static/images/uploads"
 public_folder: "images"
 
-site_url: https://startling-kashata-c7aedb.netlify.app
+site_url: https://paregis.me
 display_url: https://paregis.me
 
 collections:
