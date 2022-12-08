@@ -2,6 +2,7 @@ backend:
   name: github
   repo: regisin/paregis.me
   branch: main
+  base_url: https://8uc24k.deta.dev/
 
 publish_mode: editorial_workflow
 
