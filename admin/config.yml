@@ -47,6 +47,9 @@ collections:
   - label: "Publications"
     name: "publications"
     folder: "content/publications"
+    path: "{{slug}}/index"
+    media_folder: "images"
+    public_folder: "images"
     create: true
     fields:
       - {label: "Title", name: "title", widget: "string"}
