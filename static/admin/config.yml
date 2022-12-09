@@ -21,8 +21,15 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Description", name: "description", widget: "string"}
-      - {label: "Category", name: "categories", widget: "select", options: ["Miscellaneous", "Tutorial"]}
+      - {label: "Categories", name: "categories", widget: "relation", collection: "categories", searchFields: ["name"], valueField: "name", displayFields: ["name"], multiple: true}
       - {label: "Body", name: "body", widget: "markdown"}
+  - label: "Categories"
+    name: "categories"
+    folder: "content/categories"
+    create: true
+    slug: "{{name}}"
+    fields:
+      - {label: "Name", name: "name", widget: "string"}
   - label: "Publications"
     name: "publications"
     folder: "content/publications"
@@ -33,11 +40,3 @@ collections:
       - {label: "Citation (use inline markdown)", name: "citation", widget: "string"}
       - {label: "Category", name: "categories", widget: "select", options: ["Journal", "Conference"]}
       - {label: "Body", name: "body", widget: "markdown"}
-      - {label: "Categories", name: "categories", widget: "relation", collection: "categories", searchFields: ["name"], valueField: "name", displayFields: ["name"], multiple: true}
-  - label: "Categories"
-    name: "categories"
-    folder: "content/categories"
-    create: true
-    slug: "{{name}}"
-    fields:
-      - {label: "Name", name: "name", widget: "string"}
