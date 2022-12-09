@@ -16,6 +16,9 @@ collections:
   - label: "Posts"
     name: "posts"
     folder: "content/posts"
+    path: "{{slug}}/index"
+    media_folder: "images"
+    public_folder: "images"
     create: true
     fields:
       - {label: "Title", name: "title", widget: "string"}
