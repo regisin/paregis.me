@@ -21,13 +21,24 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Description", name: "description", widget: "string"}
-      - {label: "Categories", name: "categories", widget: "relation", collection: "categories", searchFields: ["name"], valueField: "name", displayFields: ["name"], multiple: true}
+      - label: "Categories"
+        name: "categories"
+        widget: "list"
+        field: {
+          label: "category",
+          name: "category",
+          widget: "relation",
+          collection: "categories",
+          searchFields: ["name"],
+          valueField: "name"
+        }
       - {label: "Body", name: "body", widget: "markdown"}
   - label: "Categories"
     name: "categories"
     folder: "content/categories"
     create: true
     slug: "{{name}}"
+    identifier_field: "name"
     fields:
       - {label: "Name", name: "name", widget: "string"}
   - label: "Publications"
