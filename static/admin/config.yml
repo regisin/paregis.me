@@ -6,7 +6,7 @@ backend:
 
 publish_mode: editorial_workflow
 
-media_folder: "static/images/uploads"
+media_folder: "static/images"
 public_folder: "images"
 
 site_url: https://paregis.me
