@@ -57,3 +57,40 @@ collections:
       - {label: "Citation (use inline markdown)", name: "citation", widget: "string"}
       - {label: "Category", name: "categories", widget: "select", options: ["Journal", "Conference"]}
       - {label: "Body", name: "body", widget: "markdown"}
+  - label: "Pages"
+    name: "pages"
+    files:
+      - label: "About"
+        name: "about"
+        file: "content/about/index.md"
+        media_folder: "images"
+        public_folder: "images"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "string"}
+          - {label: "Content", name: "body", widget: "markdown"}
+          - label: "Menu"
+            name: "menu"
+            widget: "markdown"
+            fields:
+              - label: "Main"
+                name: "main"
+                fields:
+                  - {label: "Weight", name: "weight", widget: "number", value_type: "int"}
+      - label: "Teaching"
+        name: "teaching"
+        file: "content/teaching/_index.md"
+        media_folder: "images"
+        public_folder: "images"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "string"}
+          - {label: "Content", name: "body", widget: "markdown"}
+          - label: "Menu"
+            name: "menu"
+            widget: "markdown"
+            fields:
+              - label: "Main"
+                name: "main"
+                fields:
+                  - {label: "Weight", name: "weight", widget: "number", value_type: "int"}
