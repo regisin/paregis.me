@@ -2,7 +2,7 @@ backend:
   name: github
   repo: regisin/paregis.me
   branch: main
-  base_url: https://auth.adislexa.paregis.me/
+  base_url: https://auth.adislexa.com/
 
 publish_mode: editorial_workflow
 
