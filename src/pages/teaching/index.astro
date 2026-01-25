@@ -1,0 +1,39 @@
+---
+import AboutHeroImage from './images/hero.png';
+import Layout from '../../layouts/BlogPost.astro';
+---
+
+<Layout
+	title="Teaching"
+	description="List of higher education courses I have taught over the years categorized by institution and semester they were taught."
+	pubDate={new Date('January 01 2026')}
+	heroImage={AboutHeroImage}
+>
+	<h2>Southeastern Louisiana University</h2>
+	<ul>
+		<li>Algorithm Design and Implementation II (CMPS 280)</li>
+		<li>Advanced Computer Networks (CMPS 409)</li>
+		<li>Computer Networking and Security (CMPS 329)</li>
+		<li>IoT for Data Science (CMPS 691)</li>
+		<li>Special Topics in Information Technology (CMPS 494/594)</li>
+		<li>Introduction to Applied Networking (CMPS 209)</li>
+		<li>Algorithm Design and Implementation I (CMPS 161)</li>
+	</ul>
+
+	<h2>University of Nevada, Reno</h2>
+	<ul>
+		<li>Computer Communication Networks (CPE 400/600)</li>
+	</ul>
+
+	<h3>Teaching assistant</h3>
+	<ul>
+		<li>Introduction to Engineering Design (ENGR 100)</li>
+		<li>Computer Communication Networks (CPE 400/600)</li>
+	</ul>
+
+	<h2>Research Experience Mentor</h2>
+	<ul>
+		<li>RET: Cyber Security Initiative for Nevada Teachers</li>
+		<li>REU: Collaborative Human-Robot Interaction</li>
+	</ul>
+</Layout>
